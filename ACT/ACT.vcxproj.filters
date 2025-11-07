@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="SourceCode">
+      <UniqueIdentifier>{19c59b3e-6af1-4d20-a378-afdec5795639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CGame">
+      <UniqueIdentifier>{229fd3c3-104b-41a1-b13f-cd947580eec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CWinInit">
+      <UniqueIdentifier>{a2382aa6-e8bb-428b-9d0a-4d8a4f59a2d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CImage">
+      <UniqueIdentifier>{2648aaca-6753-4878-b7e5-284ea6e215b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CCamera">
+      <UniqueIdentifier>{188aa6bd-90e5-443b-99fe-330cccb29f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CGameObject">
+      <UniqueIdentifier>{a54b2816-156a-40da-a366-75708626b23c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CGameObject\CCharacter">
+      <UniqueIdentifier>{fb2e8777-fb1a-46cb-bb67-e164f7751a51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CGameObject\CCharacter\CEnemy">
+      <UniqueIdentifier>{2835a5b1-81f7-4ae9-8d5a-d08f6a6b4b29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CGameObject\CCharacter\CPlayer">
+      <UniqueIdentifier>{5dbbb1b6-ed0e-4c1f-8d70-6144867faef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CGameObject\CStage">
+      <UniqueIdentifier>{10d2c4a2-5962-4042-bf47-f6bd39157b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CSoundManager">
+      <UniqueIdentifier>{d750fc2c-898e-473c-b76e-c4eda7a5d55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CSoundManager\CSound">
+      <UniqueIdentifier>{2acd463a-55c6-4755-96a1-7b2769f6cb9d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SourceCode\Main.cpp">
+      <Filter>SourceCode</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CGame.cpp">
+      <Filter>SourceCode\CGame</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CSound.cpp">
+      <Filter>SourceCode\CSoundManager\CSound</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CWinInit.cpp">
+      <Filter>SourceCode\CWinInit</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CImage.cpp">
+      <Filter>SourceCode\CImage</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CPlayer.cpp">
+      <Filter>SourceCode\CGameObject\CCharacter\CPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CEnemy.cpp">
+      <Filter>SourceCode\CGameObject\CCharacter\CEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CStage.cpp">
+      <Filter>SourceCode\CGameObject\CStage</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CCamera.cpp">
+      <Filter>SourceCode\CCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CCharacter.cpp">
+      <Filter>SourceCode\CGameObject\CCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CGameObject.cpp">
+      <Filter>SourceCode\CGameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CSoundManager.cpp">
+      <Filter>SourceCode\CSoundManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SourceCode\Global.h">
+      <Filter>SourceCode</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CGame.h">
+      <Filter>SourceCode\CGame</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CSound.h">
+      <Filter>SourceCode\CSoundManager\CSound</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CWinInit.h">
+      <Filter>SourceCode\CWinInit</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CImage.h">
+      <Filter>SourceCode\CImage</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CPlayer.h">
+      <Filter>SourceCode\CGameObject\CCharacter\CPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\MyMath.h">
+      <Filter>SourceCode</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\MyMacro.h">
+      <Filter>SourceCode</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CEnemy.h">
+      <Filter>SourceCode\CGameObject\CCharacter\CEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CStage.h">
+      <Filter>SourceCode\CGameObject\CStage</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CCamera.h">
+      <Filter>SourceCode\CCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CCharacter.h">
+      <Filter>SourceCode\CGameObject\CCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CGameObject.h">
+      <Filter>SourceCode\CGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CSoundManager.h">
+      <Filter>SourceCode\CSoundManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
