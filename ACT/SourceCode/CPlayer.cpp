@@ -33,7 +33,7 @@ void CPlayer::Update()
 	KeyInput();
 
 	//ジャンプ中の処理
-	if (m_Jumping == true)
+	/*if (m_Jumping == true)
 	{
 		//移動量　　　　＝　ジャンプ力　　ー　加速度
 		m_Position.y -= static_cast<int>(m_JumpPower - m_JumpAcc);
@@ -48,7 +48,7 @@ void CPlayer::Update()
 			//ジャンプの音を鳴らす
 			CSoundManager::PlaySE(CSoundManager::SE_Jump);
 		}
-	}
+	}*/
 
 	//動作状態による処理の場合分け
 	switch (m_Action) {
@@ -96,14 +96,14 @@ void CPlayer::Draw( CCamera* pCamera )
 void CPlayer::KeyInput()
 {
 	//ジャンプ
-	if (GetAsyncKeyState('Z') & 0x8000)
+	/*if (GetAsyncKeyState('Z') & 0x8000)
 	{
 		if (m_Jumping == false)
 		{
 			m_Jumping = true;	//ジャンプ中にする
 			m_JumpAcc = 0.0f;	//加速度を初期化
 		}
-	}
+	}*/
 
 	//←.
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)//0x0001[遅延連射], 0x8000[即連射].
@@ -154,7 +154,7 @@ void CPlayer::Animation()
 	}
 
 	//ジャンプ中
-	if (m_Jumping == true)
+	/*if (m_Jumping == true)
 	{
 		//現在の位置が移動前の位置よりも大きい（画面上では下）になった
 		if (m_Position.y > m_OldPosition.y)
@@ -165,7 +165,7 @@ void CPlayer::Animation()
 		{
 			m_FrameSplit.x = m_FrameSplit.w * 3;//ジャンプ画像
 		}
-	}
+	}*/
 	
 	//右向き判定
 	if (m_LookingRight == true)

@@ -95,7 +95,7 @@ bool CGame::Create()
 	//敵の読み込み.
 	if (m_pEnemyImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
 	//プレイヤーの読み込み.
-	if (m_pPlayerImg->LoadBmp("Data\\Image\\player_lite.bmp") == false) return false;
+	if (m_pPlayerImg->LoadBmp("Data\\Image\\player_lite02.bmp") == false) return false;
 	//ステージの読み込み.
 	if (m_pStageImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;
 
