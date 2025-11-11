@@ -100,12 +100,12 @@ bool CGame::Create()
 	if( m_pCharaImg->LoadBmp("Data\\BMP\\chara.bmp" )	== false ) return false;
 	//敵の読み込み.
 	if (m_pEnemyImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
-	//プレイヤー(右向いている)の読み込み.
-	if (m_pPlayer_right_Img->LoadBmp("Data\\Image\\migi_1.bmp") == false) return false;
-	//プレイヤー（左向いている）の読み込み.
-	if (m_pPlayer_left_Img->LoadBmp("Data\\Image\\hidari_1.bmp") == false) return false;
-	//プレイヤー（アタック）の読み込み.
-	if (m_pPlayer_atk_Img->LoadBmp("Data\\Image\\atk.bmp") == false) return false;
+	////プレイヤー(右向いている)の読み込み.
+	//if (m_pPlayer_right_Img->LoadBmp("Data\\Image\\migi.bmp") == false) return false;
+	////プレイヤー（左向いている）の読み込み.
+	//if (m_pPlayer_left_Img->LoadBmp("Data\\Image\\hidari.bmp") == false) return false;
+	////プレイヤー（アタック）の読み込み.
+	//if (m_pPlayer_atk_Img->LoadBmp("Data\\Image\\atk.bmp") == false) return false;
 	//ステージの読み込み.
 	if (m_pStageImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;
 
