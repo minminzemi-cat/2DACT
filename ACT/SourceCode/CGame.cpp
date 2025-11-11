@@ -19,7 +19,9 @@ CGame::CGame( GameWindow* pGameWnd )
 	, m_pBackImg	( nullptr )
 	, m_pCharaImg	( nullptr )
 	, m_pEnemyImg	( nullptr )
-	, m_pPlayerImg  ( nullptr )
+	, m_pPlayer_right_Img  ( nullptr )
+	, m_pPlayer_left_Img	(nullptr)
+	, m_pPlayer_atk_Img		(nullptr)
 	, m_pStageImg	( nullptr )
 	, m_Player		()
 	, m_pPlayer		( nullptr )
@@ -84,7 +86,11 @@ bool CGame::Create()
 	//敵画像のインスタンス生成
 	m_pEnemyImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//プレイヤー画像のインスタンス生成
-	m_pPlayerImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	m_pPlayer_right_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	//プレイヤー画像のインスタンス生成
+	m_pPlayer_left_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	//プレイヤー画像のインスタンス生成
+	m_pPlayer_atk_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//ステージ画像のインスタンス生成
 	m_pStageImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	
@@ -94,8 +100,12 @@ bool CGame::Create()
 	if( m_pCharaImg->LoadBmp("Data\\BMP\\chara.bmp" )	== false ) return false;
 	//敵の読み込み.
 	if (m_pEnemyImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
-	//プレイヤーの読み込み.
-	if (m_pPlayerImg->LoadBmp("Data\\Image\\player_lite02.bmp") == false) return false;
+	//プレイヤー(右向いている)の読み込み.
+	if (m_pPlayer_right_Img->LoadBmp("Data\\Image\\migi_1.bmp") == false) return false;
+	//プレイヤー（左向いている）の読み込み.
+	if (m_pPlayer_left_Img->LoadBmp("Data\\Image\\hidari_1.bmp") == false) return false;
+	//プレイヤー（アタック）の読み込み.
+	if (m_pPlayer_atk_Img->LoadBmp("Data\\Image\\atk.bmp") == false) return false;
 	//ステージの読み込み.
 	if (m_pStageImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;
 
@@ -103,7 +113,18 @@ bool CGame::Create()
 	//プレイヤーのインスタンス生成
 	m_pPlayer = new CPlayer();
 	//画像の設定
-	m_pPlayer->SetImage(m_pPlayerImg);
+	m_pPlayer->SetImage(m_pPlayer_right_Img);
+
+	//プレイヤーのインスタンス生成
+	m_pPlayer = new CPlayer();
+	//画像の設定
+	m_pPlayer->SetImage(m_pPlayer_left_Img);
+
+	//プレイヤーのインスタンス生成
+	m_pPlayer = new CPlayer();
+	//画像の設定
+	m_pPlayer->SetImage(m_pPlayer_atk_Img);
+
 
 	//エネミーのインスタンス生成
 	m_pEnemy = new CEnemy();
@@ -141,7 +162,9 @@ void CGame::Destroy()
 
 	//BITMAPの解放.
 	SAFE_DELETE(m_pStageImg);
-	SAFE_DELETE(m_pPlayerImg);
+	SAFE_DELETE(m_pPlayer_right_Img);
+	SAFE_DELETE(m_pPlayer_left_Img);
+	SAFE_DELETE(m_pPlayer_atk_Img);
 	SAFE_DELETE(m_pEnemyImg);
 	SAFE_DELETE(m_pCharaImg);
 	SAFE_DELETE(m_pBackImg);

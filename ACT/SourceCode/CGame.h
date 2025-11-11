@@ -88,7 +88,10 @@ private:
 	CImage*		m_pBackImg;		//背景.
 	CImage*		m_pCharaImg;		//キャラクター画像.
 	CImage*		m_pEnemyImg;		//敵画像.
-	CImage*		m_pPlayerImg;	//プレイヤー画像
+	CImage*		m_pPlayer_right_Img;	//プレイヤー(右向き)画像
+	CImage*		m_pPlayer_left_Img;	//プレイヤー（左向き）画像
+	CImage*		m_pPlayer_atk_Img;	//プレイヤー（アタック）画像
+
 	CImage*		m_pStageImg;	//ステージ画像
 	
 	//-----自機-----.
