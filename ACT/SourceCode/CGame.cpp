@@ -19,6 +19,7 @@ CGame::CGame( GameWindow* pGameWnd )
 	, m_pBackImg	( nullptr )
 	, m_pCharaImg	( nullptr )
 	, m_pEnemyImg	( nullptr )
+	, m_pBossImg    (nullptr)
 	, m_pPlayer_right_Img  ( nullptr )
 	, m_pPlayer_left_Img	(nullptr)
 	, m_pPlayer_atk_Img		(nullptr)
@@ -26,6 +27,7 @@ CGame::CGame( GameWindow* pGameWnd )
 	, m_Player		()
 	, m_pPlayer		( nullptr )
 	, m_pEnemy		( nullptr )
+	, m_pBoss		( nullptr)
 	, m_pStage		( nullptr )
 	, m_pCamera		( nullptr )
 {
@@ -85,6 +87,8 @@ bool CGame::Create()
 	m_pCharaImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//敵画像のインスタンス生成
 	m_pEnemyImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	//ボス画像のインスタンス生成
+	m_pBossImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//プレイヤー画像のインスタンス生成
 	m_pPlayer_right_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//プレイヤー画像のインスタンス生成
@@ -100,6 +104,9 @@ bool CGame::Create()
 	if( m_pCharaImg->LoadBmp("Data\\BMP\\chara.bmp" )	== false ) return false;
 	//敵の読み込み.
 	if (m_pEnemyImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
+	//ボスの読み込み.
+	if (m_pBossImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
+
 	////プレイヤー(右向いている)の読み込み.
 	//if (m_pPlayer_right_Img->LoadBmp("Data\\Image\\migi.bmp") == false) return false;
 	////プレイヤー（左向いている）の読み込み.
@@ -131,6 +138,11 @@ bool CGame::Create()
 	//画像の設定
 	m_pEnemy->SetImage(m_pEnemyImg);
 
+	//ボスのインスタンス生成
+	m_pBoss = new CBoss();
+	//画像の設定
+	m_pBoss->SetImage(m_pBossImg);
+
 	//ステージのインスタンス生成
 	m_pStage = new CStage();
 	//画像の設定
@@ -156,6 +168,8 @@ void CGame::Destroy()
 	SAFE_DELETE(m_pStage);
 
 	SAFE_DELETE(m_pEnemy);
+
+	SAFE_DELETE(m_pBoss);
 
 	SAFE_DELETE(m_pPlayer);
 
