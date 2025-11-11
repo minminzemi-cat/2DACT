@@ -37,6 +37,9 @@
     <Filter Include="SourceCode\CSoundManager\CSound">
       <UniqueIdentifier>{2acd463a-55c6-4755-96a1-7b2769f6cb9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceCode\CGameObject\CCharacter\CBoss">
+      <UniqueIdentifier>{5a1064f3-f247-4d09-9fb3-fc8197db8ea7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Main.cpp">
@@ -74,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="SourceCode\CSoundManager.cpp">
       <Filter>SourceCode\CSoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CBoss.cpp">
+      <Filter>SourceCode\CGameObject\CCharacter\CBoss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\CSoundManager.h">
       <Filter>SourceCode\CSoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CBoss.h">
+      <Filter>SourceCode\CGameObject\CCharacter\CBoss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
