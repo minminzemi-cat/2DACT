@@ -4,6 +4,7 @@
 /**********************************
 * 		ボスクラス
 *	***/
+
 class CBoss
 	: public CCharacter  //キャラクタークラスを継承
 {
@@ -22,13 +23,13 @@ class CBoss
 								//		仮想関数でない場合はエラーになる
 		//描画関数
 		void Draw(CCamera* pCamera) override;
+		//アニメーション処理
+		void Animation();
 private:
-	void AttackPattern1();
-	void AttackPattern2();
-	void Animation();
+	int			m_GroundPos;	//地面の位置（定数でも可）
 
-private:
-	CHARA m_Boss;
-
+	//攻撃の処理
+	bool	m_Atak1;
+	bool	m_Atak2;
 
 };
