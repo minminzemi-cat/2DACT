@@ -172,5 +172,6 @@ void CPlayer::Animation()
 	if (m_LookingRight == true)
 	{
 		m_FrameSplit.y += m_FrameSplit.h;
+
 	}
 }

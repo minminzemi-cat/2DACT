@@ -29,6 +29,8 @@ CGame::CGame( GameWindow* pGameWnd )
 	, m_pEnemy		( nullptr )
 	, m_pBoss		( nullptr)
 	, m_pStage		( nullptr )
+	, m_pTitleImg	( nullptr )
+	, m_pEndingImg	( nullptr )
 	, m_pCamera		( nullptr )
 {
 }
@@ -96,8 +98,16 @@ bool CGame::Create()
 	//プレイヤー画像のインスタンス生成
 	m_pPlayer_atk_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//ステージ画像のインスタンス生成
+	m_pTitleImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+
+	//タイトル画像のインスタンス生成
+	m_pEndingImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+
+	//エンディング画像のインスタンス生成
 	m_pStageImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	
+
+
 	//背景の読み込み.
 	if( m_pBackImg->LoadBmp("Data\\Image\\bg.bmp" )		== false ) return false;
 	//キャラクターの読み込み.
@@ -113,9 +123,17 @@ bool CGame::Create()
 	if (m_pPlayer_left_Img->LoadBmp("Data\\Image\\hidari.bmp") == false) return false;
 	////プレイヤー（アタック）の読み込み.
 	//if (m_pPlayer_atk_Img->LoadBmp("Data\\Image\\atk.bmp") == false) return false;
+	
 	//ステージの読み込み.
 	if (m_pStageImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;
 
+
+	//タイトルの読み込み.
+	if (m_pTitleImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;
+
+
+	//エンディングの読み込み.
+	if (m_pEndingImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;
 
 	//プレイヤーのインスタンス生成
 	m_pPlayer = new CPlayer();
@@ -124,7 +142,7 @@ bool CGame::Create()
 
 	////プレイヤーのインスタンス生成
 	//画像の設定
-	m_pPlayer->SetImage(m_pPlayer_left_Img);
+	//m_pPlayer->SetImage(m_pPlayer_left_Img);
 
 	////プレイヤーのインスタンス生成
 	//m_pPlayer = new CPlayer();
@@ -146,6 +164,20 @@ bool CGame::Create()
 	m_pStage = new CStage();
 	//画像の設定
 	m_pStage->SetImage(m_pStageImg);
+
+	//タイトルのインスタンス生成
+	m_pTitle = new CStage();
+	//画像の設定
+	m_pTitle->SetImage(m_pTitleImg);
+	
+	
+	//エンディングのインスタンス生成
+	m_pEnding = new CStage();
+	//画像の設定
+	m_pEnding->SetImage(m_pEndingImg);
+
+	
+
 	//マップデータの読み込み
 	if(m_pStage->LoadData("Data\\MapData\\Map01.csv") == false) return false;
 

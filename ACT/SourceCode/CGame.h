@@ -95,6 +95,10 @@ private:
 	CImage*		m_pPlayer_atk_Img;	//プレイヤー（アタック）画像
 
 	CImage*		m_pStageImg;	//ステージ画像
+
+	//タイトル画面とエンディング画面の画像を入れる
+	CImage*		m_pTitleImg;
+	CImage*		m_pEndingImg;
 	
 	//-----自機-----.
 	CHARA		m_Player;
@@ -103,6 +107,12 @@ private:
 	CEnemy* m_pEnemy;			//エネミー
 	//-----ステージ-----.
 	CStage* m_pStage;			//ステージ
+
+	//----タイトル-----
+	CStage* m_pTitle;
+
+	//----エンディング
+	CStage* m_pEnding;
 
 	//-----カメラ------
 	CCamera* m_pCamera;
