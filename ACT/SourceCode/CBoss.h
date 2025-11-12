@@ -25,6 +25,12 @@ class CBoss
 		void Draw(CCamera* pCamera) override;
 		//アニメーション処理
 		void Animation();
+		void AttackPattern1();
+		void AttackPattern2();
+
+		CHARA m_Boss;
+
+
 private:
 	int			m_GroundPos;	//地面の位置（定数でも可）
 
