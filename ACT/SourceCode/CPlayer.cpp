@@ -123,6 +123,7 @@ void CPlayer::Animation()
 	//常にカウンターを動かす
 	m_FrameCounter++;
 
+	//僕の画像はこの大きさでないとだめ
 	m_FrameSplit.w = 128;
 	m_FrameSplit.h = 64;
 	m_FrameSplit.y = 0;
