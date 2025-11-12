@@ -134,6 +134,18 @@ void CPlayer::Animation()
 		m_FrameCounter = 0;//待機アニメーションないので0にしておく
 		break;
 	case enAction::MoveLeft:	//左移動
+		//6フレーム事にアニメーション切り替え
+		if (m_FrameCounter >= 6) {
+			m_FrameSplit.x += m_FrameSplit.w;
+			m_FrameCounter = 0;
+		}
+
+		//歩きアニメーション最大コマ数（１コマ目）を超えると最初（0コマ目）に戻す
+		if (m_FrameSplit.x / m_FrameSplit.w > 18)
+		{
+			m_FrameSplit.x = 0;
+		}
+		break;
 	case enAction::MoveRight:	//右移動
 		//6フレーム事にアニメーション切り替え
 		if (m_FrameCounter >= 6) {
@@ -172,6 +184,12 @@ void CPlayer::Animation()
 	if (m_LookingRight == true)
 	{
 		m_FrameSplit.y += m_FrameSplit.h;
+
+	}
+	//左向き判定
+	if (m_LookingLeft == true)
+	{
+		m_FrameSplit.y -= m_FrameSplit.h;
 
 	}
 }
