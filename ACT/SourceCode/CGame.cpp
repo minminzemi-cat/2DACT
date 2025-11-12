@@ -124,7 +124,7 @@ bool CGame::Create()
 
 	////プレイヤーのインスタンス生成
 	//画像の設定
-	//m_pPlayer->SetImage(m_pPlayer_left_Img);
+	m_pPlayer->SetImage(m_pPlayer_left_Img);
 
 	////プレイヤーのインスタンス生成
 	//m_pPlayer = new CPlayer();
