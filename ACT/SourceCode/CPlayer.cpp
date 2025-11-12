@@ -123,7 +123,7 @@ void CPlayer::Animation()
 	//常にカウンターを動かす
 	m_FrameCounter++;
 
-	m_FrameSplit.w = 32;
+	m_FrameSplit.w = 128;
 	m_FrameSplit.h = 64;
 	m_FrameSplit.y = 0;
 
@@ -141,7 +141,7 @@ void CPlayer::Animation()
 		}
 
 		//歩きアニメーション最大コマ数（１コマ目）を超えると最初（0コマ目）に戻す
-		if (m_FrameSplit.x / m_FrameSplit.w > 1)
+		if (m_FrameSplit.x / m_FrameSplit.w > 18)
 		{
 			m_FrameSplit.x = 0;
 		}

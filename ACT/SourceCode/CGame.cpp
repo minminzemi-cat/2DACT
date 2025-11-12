@@ -108,9 +108,9 @@ bool CGame::Create()
 	if (m_pBossImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
 
 	////プレイヤー(右向いている)の読み込み.
-	//if (m_pPlayer_right_Img->LoadBmp("Data\\Image\\migi.bmp") == false) return false;
+	if (m_pPlayer_right_Img->LoadBmp("Data\\Image\\migi.bmp") == false) return false;
 	////プレイヤー（左向いている）の読み込み.
-	//if (m_pPlayer_left_Img->LoadBmp("Data\\Image\\hidari.bmp") == false) return false;
+	if (m_pPlayer_left_Img->LoadBmp("Data\\Image\\hidari.bmp") == false) return false;
 	////プレイヤー（アタック）の読み込み.
 	//if (m_pPlayer_atk_Img->LoadBmp("Data\\Image\\atk.bmp") == false) return false;
 	//ステージの読み込み.
@@ -122,15 +122,14 @@ bool CGame::Create()
 	//画像の設定
 	m_pPlayer->SetImage(m_pPlayer_right_Img);
 
-	//プレイヤーのインスタンス生成
-	m_pPlayer = new CPlayer();
+	////プレイヤーのインスタンス生成
 	//画像の設定
-	m_pPlayer->SetImage(m_pPlayer_left_Img);
+	//m_pPlayer->SetImage(m_pPlayer_left_Img);
 
-	//プレイヤーのインスタンス生成
-	m_pPlayer = new CPlayer();
-	//画像の設定
-	m_pPlayer->SetImage(m_pPlayer_atk_Img);
+	////プレイヤーのインスタンス生成
+	//m_pPlayer = new CPlayer();
+	////画像の設定
+	//m_pPlayer->SetImage(m_pPlayer_atk_Img);
 
 
 	//エネミーのインスタンス生成
