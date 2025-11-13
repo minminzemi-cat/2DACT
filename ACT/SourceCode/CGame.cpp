@@ -29,7 +29,9 @@ CGame::CGame( GameWindow* pGameWnd )
 	, m_pEnemy		( nullptr )
 	, m_pBoss		( nullptr)
 	, m_pStage		( nullptr )
+	, m_Scene(enScene::Title)
 	, m_pTitleImg	( nullptr )
+	, m_pGameOverImg(nullptr)
 	, m_pEndingImg	( nullptr )
 	, m_pCamera		( nullptr )
 {
@@ -129,11 +131,13 @@ bool CGame::Create()
 
 
 	//タイトルの読み込み.
-	if (m_pTitleImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;
+	if (m_pTitleImg->LoadBmp("Data\\Image\\Title.bmp") == false) return false;
 
+	//ゲームオーバーの読み込み.
+	if (m_pGameOverImg->LoadBmp("Data\\Image\\GameOver.bmp") == false) return false;
 
 	//エンディングの読み込み.
-	if (m_pEndingImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;
+	if (m_pEndingImg->LoadBmp("Data\\Image\\gamekuria.bmp") == false) return false;
 
 	//プレイヤーのインスタンス生成
 	m_pPlayer = new CPlayer();
@@ -232,30 +236,74 @@ void CGame::Update()
 		//BGM_Bonusをループ再生
 	CSoundManager::PlayLoop(CSoundManager::BGM_Bonus);
 
-		//F1キー.
-		if( GetAsyncKeyState( VK_F1 ) & 0x0001 ) {
-			//ウィンドウを閉じる通知を送る.
-			PostMessage( m_pGameWnd->hWnd, WM_CLOSE, 0, 0 );
-		}
+	//シーンごとの処理
+	switch (m_Scene) {
+		case enScene::Title://タイトル
+			if (GetAsyncKeyState(VK_RETURN) & 0x0001)//Enterキーが押されたら
+			{
+				//F1キー.
+				if (GetAsyncKeyState(VK_F1) & 0x0001) {
+					//ウィンドウを閉じる通知を送る.
+					PostMessage(m_pGameWnd->hWnd, WM_CLOSE, 0, 0);
+				}
+				m_Scene = enScene::GameMain;
 
-		//プレイヤー動作
-		m_pPlayer->Update();
+				//タイトル動作
+				m_pTitle->Update();
+			}
+			break;
 
-		//エネミー動作
-		m_pEnemy->Update();
+		case enScene::GameMain:
+			
+				//F1キー.
+				if (GetAsyncKeyState(VK_F1) & 0x0001) {
+					//ウィンドウを閉じる通知を送る.
+					PostMessage(m_pGameWnd->hWnd, WM_CLOSE, 0, 0);
+				}
 
-		//ステージ動作
-		m_pStage->Update();
+				//プレイヤー動作
+				m_pPlayer->Update();
 
-		//カメラ位置をプレイヤーにそろえる
-		//※カメラ位置を揃えるタイミグはすべての動作が完了し最終的な座標が確定した後
-		m_pCamera->SePosition(m_pPlayer->GetPosition());
-		
+				//エネミー動作
+				m_pEnemy->Update();
+
+				//ステージ動作
+				m_pStage->Update();
+
+				//カメラ位置をプレイヤーにそろえる
+				//※カメラ位置を揃えるタイミグはすべての動作が完了し最終的な座標が確定した後
+				m_pCamera->SePosition(m_pPlayer->GetPosition());
+
+				m_Scene = enScene::GameOver;
+			
+		break;
+		case enScene::GameOver://ゲームオーバー
+			//F1キー.
+			if (GetAsyncKeyState(VK_F1) & 0x0001) {
+				//ウィンドウを閉じる通知を送る.
+				PostMessage(m_pGameWnd->hWnd, WM_CLOSE, 0, 0);
+			}
+			if (GetAsyncKeyState(VK_RETURN) & 0x0001)
+			{
+				//ゲームオーバー動作
+				m_pGameOver->Update();
+
+				m_Scene = enScene::GameMain;
+			}
+			break;
+	}
 }
 
 //描画関数(画像の表示処理を行う).
 void CGame::Draw()
 {
+	switch(m_Scene){
+	case enScene::Title://タイトル
+		//タイトル描画
+		m_pTitle->Draw(m_pCamera);
+		break;
+	case enScene::GameMain://ゲーム中
+
 		
 		//ステージ描画
 		m_pStage->Draw( m_pCamera );
@@ -265,6 +313,20 @@ void CGame::Draw()
 
 		//エネミー描画
 		m_pEnemy->Draw( m_pCamera);
+
+		break;
+	case enScene::GameOver://ゲームオーバー
+		//ゲームオーバー描画
+		m_pGameOver->Draw(m_pCamera);
+		break;
+	case enScene::Ending://エンディング
+
+		//エンディング描画
+			
+		m_pEnding->Draw(m_pCamera);
+
+		break;
+	}
 
 		
 		/*SelectObject(m_hMemDC, m_pEnemyImg->GetBmp());

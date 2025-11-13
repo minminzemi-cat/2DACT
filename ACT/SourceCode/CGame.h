@@ -98,7 +98,11 @@ private:
 
 	//タイトル画面とエンディング画面の画像を入れる
 	CImage*		m_pTitleImg;
+	CImage*		m_pGameOverImg;
 	CImage*		m_pEndingImg;
+
+	//シーン
+	enScene		m_Scene;
 	
 	//-----自機-----.
 	CHARA		m_Player;
@@ -110,6 +114,9 @@ private:
 
 	//----タイトル-----
 	CStage* m_pTitle;
+
+	//----ゲームオーバー
+	CStage* m_pGameOver;
 
 	//----エンディング
 	CStage* m_pEnding;
