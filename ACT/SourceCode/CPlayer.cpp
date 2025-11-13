@@ -6,6 +6,7 @@ CPlayer::CPlayer()//コンストラクタ
 	:m_GroundPos	(WND_H - 64)
 	,m_OldPosition	()
 	,m_Action		( enAction::Wait )
+	, m_Attacking	(false)
 	,m_Jumping		( false)
 	,m_JumpAcc		( 0.0f)		//値を変えるとジャンプの高さが変わる
 	,m_JumpPower	( 24.0f )	//値を変えると落下速度がかわる
@@ -73,6 +74,12 @@ void CPlayer::Update()
 	{
 		m_FrameSplit.y += m_FrameSplit.h;
 	}
+	//左向き判定
+	if (m_LookingLeft == true)
+	{
+		m_FrameSplit.y -= m_FrameSplit.h;
+
+	}
 }
 
 //描画関数
@@ -86,6 +93,17 @@ void CPlayer::Draw( CCamera* pCamera )
 	m_pImg->TransBlt(
 		DispPos.x,		//表示位置x座標
 		DispPos.y,		//表示位置y座標.
+		m_FrameSplit.w,		//画像幅
+		m_FrameSplit.h,		//画像高さ.
+		m_FrameSplit.x,		//元画像x座標.
+		m_FrameSplit.y);	//元画像y座標.
+
+	Animation2();
+	VECTOR2 DispPos2 = pCamera->CalcToPositionInCamera(&m_Position, &m_FrameSplit);
+
+	m_pImg->TransBlt(
+		DispPos2.x,		//表示位置x座標
+		DispPos2.y,		//表示位置y座標.
 		m_FrameSplit.w,		//画像幅
 		m_FrameSplit.h,		//画像高さ.
 		m_FrameSplit.x,		//元画像x座標.
@@ -134,17 +152,7 @@ void CPlayer::Animation()
 		m_FrameCounter = 0;//待機アニメーションないので0にしておく
 		break;
 	case enAction::MoveLeft:	//左移動
-		//6フレーム事にアニメーション切り替え
-		if (m_FrameCounter >= 6) {
-			m_FrameSplit.x += m_FrameSplit.w;
-			m_FrameCounter = 0;
-		}
-
-		//歩きアニメーション最大コマ数（１コマ目）を超えると最初（0コマ目）に戻す
-		if (m_FrameSplit.x / m_FrameSplit.w > 18)
-		{
-			m_FrameSplit.x = 0;
-		}
+		
 		break;
 	case enAction::MoveRight:	//右移動
 		//6フレーム事にアニメーション切り替え
@@ -191,5 +199,43 @@ void CPlayer::Animation()
 	{
 		m_FrameSplit.y -= m_FrameSplit.h;
 
+	}
+}
+
+void CPlayer::Animation2()
+{
+
+	//常にカウンターを動かす
+	m_FrameCounter++;
+
+	//僕の画像はこの大きさでないとだめ
+	m_FrameSplit.w = 128;
+	m_FrameSplit.h = 64;
+	m_FrameSplit.y = 0;
+	switch (m_Action) {
+	case enAction::Wait:		//待機
+		m_FrameSplit.x = 0;//待機画像（０コマ目）
+		m_FrameCounter = 0;//待機アニメーションないので0にしておく
+		break;
+	case enAction::MoveLeft:	//左移動
+		//6フレーム事にアニメーション切り替え
+		if (m_FrameCounter >= 6) {
+			m_FrameSplit.x += m_FrameSplit.w;
+			m_FrameCounter = 0;
+		}
+
+		//歩きアニメーション最大コマ数（１コマ目）を超えると最初（0コマ目）に戻す
+		if (m_FrameSplit.x / m_FrameSplit.w > 18)
+		{
+			m_FrameSplit.x = 0;
+		}
+		break;
+	case enAction::MoveRight:	//右移動
+		break;
+
+	case enAction::None:		//未設定
+		break;
+	default:
+		break;
 	}
 }

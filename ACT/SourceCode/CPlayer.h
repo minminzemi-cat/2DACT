@@ -33,12 +33,18 @@ private:
 	//アニメーション処理
 	void Animation();
 
+	//左向きに歩くようにアニメーション追加
+	void Animation2();
+
 private:
 	int			m_GroundPos;	//地面の位置（定数でも可）
 
 	VECTOR2		m_OldPosition;	//移動前の座標
 
 	int			m_Action;		//動作状態
+
+	//アタック処理
+	bool		m_Attacking;	//攻撃中
 
 	//ジャンプ処理
 	bool		m_Jumping;	//ジャンプ中
