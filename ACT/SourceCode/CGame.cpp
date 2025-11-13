@@ -101,7 +101,8 @@ bool CGame::Create()
 	m_pPlayer_atk_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//ステージ画像のインスタンス生成
 	m_pTitleImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
-
+	//ゲームオーバー画像のインスタンス生成
+	m_pGameOverImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//タイトル画像のインスタンス生成
 	m_pEndingImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
@@ -173,6 +174,11 @@ bool CGame::Create()
 	m_pTitle = new CStage();
 	//画像の設定
 	m_pTitle->SetImage(m_pTitleImg);
+
+	//ゲームオーバーのインスタンス生成
+	m_pGameOver = new CStage();
+	//画像の設定
+	m_pGameOver->SetImage(m_pGameOverImg);
 	
 	
 	//エンディングのインスタンス生成
@@ -210,6 +216,9 @@ void CGame::Destroy()
 
 
 	//BITMAPの解放.
+	SAFE_DELETE(m_pEndingImg);
+	SAFE_DELETE(m_pGameOverImg);
+	SAFE_DELETE(m_pTitleImg);
 	SAFE_DELETE(m_pStageImg);
 	SAFE_DELETE(m_pPlayer_right_Img);
 	SAFE_DELETE(m_pPlayer_left_Img);
@@ -255,11 +264,7 @@ void CGame::Update()
 
 		case enScene::GameMain:
 			
-				//F1キー.
-				if (GetAsyncKeyState(VK_F1) & 0x0001) {
-					//ウィンドウを閉じる通知を送る.
-					PostMessage(m_pGameWnd->hWnd, WM_CLOSE, 0, 0);
-				}
+				
 
 				//プレイヤー動作
 				m_pPlayer->Update();
@@ -274,8 +279,16 @@ void CGame::Update()
 				//※カメラ位置を揃えるタイミグはすべての動作が完了し最終的な座標が確定した後
 				m_pCamera->SePosition(m_pPlayer->GetPosition());
 
-				m_Scene = enScene::GameOver;
-			
+				//F1キー.
+				if (GetAsyncKeyState(VK_F1) & 0x0001) {
+					//ウィンドウを閉じる通知を送る.
+					PostMessage(m_pGameWnd->hWnd, WM_CLOSE, 0, 0);
+				}
+
+				if (GetAsyncKeyState(VK_RETURN) & 0x0001)
+				{
+					m_Scene = enScene::GameOver;
+				}
 		break;
 		case enScene::GameOver://ゲームオーバー
 			//F1キー.
