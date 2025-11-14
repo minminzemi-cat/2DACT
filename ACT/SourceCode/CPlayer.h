@@ -27,12 +27,23 @@ public:
 	//描画関数
 	void Draw( CCamera* pCamera);
 
+	//画像を３つ設定する関数
+	void ThreeSetImage(CImage* pImg, CImage* pImg2, CImage* pImg3)
+	{
+		m_pImg = pImg;
+		m_pImg_Right = pImg;
+		m_pImg_Left = pImg2;
+		m_pImg_Atk = pImg3;
+	}
 private:
 	//操作処理
 	void KeyInput();
 	//アニメーション処理
 	void Animation();
 
+	CImage* m_pImg_Right;
+	CImage* m_pImg_Left;
+	CImage* m_pImg_Atk;
 	
 
 private:

@@ -11,6 +11,9 @@ CPlayer::CPlayer()//コンストラクタ
 	,m_JumpAcc		( 0.0f)		//値を変えるとジャンプの高さが変わる
 	,m_JumpPower	( 24.0f )	//値を変えると落下速度がかわる
 	,m_Gravity		( 0.8f )
+	,m_pImg_Right	( m_pImg2)
+	,m_pImg_Left	( m_pImg3)
+	,m_pImg_Atk		( m_pImg4 )
 {
 	m_Position = VECTOR2(0, m_GroundPos);
 	m_MoveSpeed = 4;
@@ -117,11 +120,22 @@ void CPlayer::KeyInput()
 	//←.
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)//0x0001[遅延連射], 0x8000[即連射].
 	{
+		//画像の入れ替え
+		//m_pImgに入っている画像データをm_pImg2と変える
+		//CImage* pmp = m_pImg;
+		//m_pImg = m_pImg2;
+		//m_pImg2 =  pmp;
+		//このままではキーを入力するたびに連続で入れ替るから
+		//きーぷする
+		m_pImg = m_pImg_Left;
+
 		m_Action = enAction::MoveLeft;
 	}
 	//→.
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)//0x0001[遅延連射], 0x8000[即連射].
 	{
+		m_pImg = m_pImg_Right;
+
 		m_Action = enAction::MoveRight;
 	}
 }
@@ -144,6 +158,7 @@ void CPlayer::Animation()
 		break;
 	case enAction::MoveLeft:	//左移動
 		//6フレーム事にアニメーション切り替え
+
 		if (m_FrameCounter >= 6) {
 			m_FrameSplit.x += m_FrameSplit.w;
 			m_FrameCounter = 0;
@@ -158,7 +173,7 @@ void CPlayer::Animation()
 	case enAction::MoveRight:	//右移動
 		//6フレーム事にアニメーション切り替え
 		if (m_FrameCounter >= 6) {
-			m_FrameSplit.x -= m_FrameSplit.w;
+			m_FrameSplit.x += m_FrameSplit.w;
 			m_FrameCounter = 0;
 		}
 
@@ -189,18 +204,23 @@ void CPlayer::Animation()
 		}
 	}*/
 	
-	//右向き判定
-	if (m_LookingRight == true)
-	{
-		m_FrameSplit.y += m_FrameSplit.h;
+	//****************************************************************************
+	//この処理は画像のキャラクターを左から右に表示していく
+	m_FrameSplit.y += m_FrameSplit.h;
+	
+	
+	
+	////右向き判定
+	//if (m_LookingRight == true)
+	//{
 
-	}
-	//左向き判定
-	if (m_LookingLeft == true)
-	{
-		m_FrameSplit.y -= m_FrameSplit.h;
+	//}
+	////左向き判定
+	//if (m_LookingLeft == true)
+	//{
+	//	m_FrameSplit.y += m_FrameSplit.h;
 
-	}
+	//}
 }
 
 
