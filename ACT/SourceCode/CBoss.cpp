@@ -6,6 +6,7 @@ CBoss::CBoss()
 	:m_GroundPos()
 	, m_Atak1()
 	, m_Atak2()
+	, m_Boss()
 {
 }
 

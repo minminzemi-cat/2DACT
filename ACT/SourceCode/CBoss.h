@@ -12,6 +12,7 @@ class CBoss
 		CBoss();//コンストラクタ
 		~CBoss() override ;//デストラクタ
 
+		//キャラクター構造体
 		struct CHARA
 		{
 			int x;

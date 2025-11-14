@@ -143,16 +143,7 @@ bool CGame::Create()
 	//プレイヤーのインスタンス生成
 	m_pPlayer = new CPlayer();
 	//画像の設定
-	m_pPlayer->SetImage(m_pPlayer_right_Img);
-
-	////プレイヤーのインスタンス生成
-	//画像の設定
-	//m_pPlayer->SetImage(m_pPlayer_left_Img);
-
-	////プレイヤーのインスタンス生成
-	//m_pPlayer = new CPlayer();
-	////画像の設定
-	//m_pPlayer->SetImage(m_pPlayer_atk_Img);
+	m_pPlayer->ThreeSetImage(m_pPlayer_right_Img, m_pPlayer_left_Img, m_pPlayer_atk_Img);
 
 
 	//エネミーのインスタンス生成

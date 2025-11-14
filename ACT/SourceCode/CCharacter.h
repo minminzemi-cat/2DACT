@@ -23,6 +23,9 @@ public:
 	//画像を設定する
 	void SetImage(CImage* pImg) { m_pImg = pImg; }
 
+	//画像を３つ設定する関数
+	void ThreeSetImage(CImage* pImg, CImage* pImg2, CImage* pImg3) { m_pImg = pImg; }
+
 	//位置情報を習得する
 	VECTOR2 GetPosition() const { return m_Position; }
 	//１コマの画像情報を習得する
@@ -30,6 +33,8 @@ public:
 
 protected:	//protected:外部からアクセス不可能。派生クラスでアクセス可能
 	CImage* m_pImg;		//画像（外部で読み込んだデータを入れる）
+	CImage* m_pImg2;
+	CImage* m_pImg3;
 
 	VECTOR2		m_Position;	//位置（座標）
 	int			m_MoveSpeed;//移動速度

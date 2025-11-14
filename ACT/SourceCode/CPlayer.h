@@ -25,7 +25,7 @@ public:
 	//動作関数
 	void Update();
 	//描画関数
-	void Draw( CCamera* pCamera );
+	void Draw( CCamera* pCamera);
 
 private:
 	//操作処理
@@ -33,8 +33,7 @@ private:
 	//アニメーション処理
 	void Animation();
 
-	//左向きに歩くようにアニメーション追加
-	void Animation2();
+	
 
 private:
 	int			m_GroundPos;	//地面の位置（定数でも可）
