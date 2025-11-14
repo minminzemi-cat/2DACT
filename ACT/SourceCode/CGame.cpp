@@ -308,7 +308,7 @@ void CGame::Draw()
 		break;
 	case enScene::GameMain://ゲーム中
 
-		
+
 		//ステージ描画
 		m_pStage->Draw( m_pCamera );
 
@@ -317,6 +317,7 @@ void CGame::Draw()
 
 		//エネミー描画
 		m_pEnemy->Draw( m_pCamera);
+		
 
 		break;
 	case enScene::GameOver://ゲームオーバー
