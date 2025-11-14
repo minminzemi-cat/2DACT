@@ -1,7 +1,7 @@
 #include "CGame.h"
 #include <time.h>		//time関数を使用するために必要.
 #include"CSoundManager.h"//サウンドマネージャークラス
-
+#include <cmath>
 
 //コンストラクタ.
 CGame::CGame()
@@ -390,5 +390,22 @@ bool CollisionDetection(
 		return true;
 	}
 	//外れた時.
+	return false;
+}
+
+//円と円の当たり判定
+bool CircleCollisionDetection(float Ax, float Ay, float Ar, float Bx, float By, float Br)
+{
+	float dx = Ax - Bx;
+	float dy = Ay - By;
+	//sqrftは平方根
+	//#include<cmath>が必要らしい
+	float distance = sqrtf(dx * dx + dy * dy);
+
+	//命中したとき
+	if (distance < Ar + Br) {
+		return true;
+	}
+	//外れた時
 	return false;
 }

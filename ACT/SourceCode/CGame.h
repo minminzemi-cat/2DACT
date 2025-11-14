@@ -133,3 +133,8 @@ private:
 bool CollisionDetection(
 	int Ax, int Ay, int Aw, int Ah,		//矩形Aのx,y座標と幅高さ.
 	int Bx, int By, int Bw, int Bh );	//矩形Bのx,y座標と幅高さ.
+
+//円と円の当たり判定
+bool CircleCollisionDetection(
+	float Ax, float Ay, float Ar,		//円Aのｘ、ｙ座標と半径
+	float Bx, float By, float Br);		//円Bのｘ、ｙ座標と半径
