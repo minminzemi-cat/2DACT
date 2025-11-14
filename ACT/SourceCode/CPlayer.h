@@ -27,7 +27,7 @@ public:
 	//描画関数
 	void Draw( CCamera* pCamera);
 
-	//画像を３つ設定する関数
+	//画像が三つあるのでそれぞれ読み込むための関数
 	void ThreeSetImage(CImage* pImg, CImage* pImg2, CImage* pImg3)
 	{
 		m_pImg = pImg;
@@ -53,8 +53,7 @@ private:
 
 	int			m_Action;		//動作状態
 
-	//アタック処理
-	bool		m_Attacking;	//攻撃中
+	bool		m_Atacking;		//攻撃中
 
 	//ジャンプ処理
 	bool		m_Jumping;	//ジャンプ中

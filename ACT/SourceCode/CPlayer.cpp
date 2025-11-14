@@ -6,7 +6,7 @@ CPlayer::CPlayer()//コンストラクタ
 	:m_GroundPos	(WND_H - 64)
 	,m_OldPosition	()
 	,m_Action		( enAction::Wait )
-	, m_Attacking	(false)
+	, m_Atacking	(false)
 	,m_Jumping		( false)
 	,m_JumpAcc		( 0.0f)		//値を変えるとジャンプの高さが変わる
 	,m_JumpPower	( 24.0f )	//値を変えると落下速度がかわる
@@ -53,6 +53,19 @@ void CPlayer::Update()
 			CSoundManager::PlaySE(CSoundManager::SE_Jump);
 		}
 	}*/
+
+	//アタック中の処理
+	if(m_Atacking == true)
+	{
+		//すべてのアニメーションを描画し終えたら終わり
+		if (m_FrameSplit.x / m_FrameSplit.w > 44)
+		{
+			m_Atacking = false; //攻撃中解除
+
+			//音楽を追加する
+
+		}
+	}
 
 	//動作状態による処理の場合分け
 	switch (m_Action) {
@@ -117,6 +130,18 @@ void CPlayer::KeyInput()
 		}
 	}*/
 
+	if (GetAsyncKeyState(' ') & 0x8000)
+	{
+		//m_pImgには今、右に向く画像が入っているので置き換えないといけない
+		
+		m_pImg = m_pImg_Atk;
+
+		if (m_Atacking = false)
+		{
+			m_Atacking = true;
+		}
+	}
+
 	//←.
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)//0x0001[遅延連射], 0x8000[即連射].
 	{
@@ -127,6 +152,10 @@ void CPlayer::KeyInput()
 		//m_pImg2 =  pmp;
 		//このままではキーを入力するたびに連続で入れ替るから
 		//きーぷする
+
+
+		//m_pImgにはpPlayerに代入したデータが入ったまま
+		//だからm_pImgに左を向いた画像を入れてOK
 		m_pImg = m_pImg_Left;
 
 		m_Action = enAction::MoveLeft;
@@ -138,6 +167,7 @@ void CPlayer::KeyInput()
 
 		m_Action = enAction::MoveRight;
 	}
+
 }
 
 //アニメーション処理
@@ -159,26 +189,26 @@ void CPlayer::Animation()
 	case enAction::MoveLeft:	//左移動
 		//6フレーム事にアニメーション切り替え
 
-		if (m_FrameCounter >= 6) {
+		if (m_FrameCounter >= 44) {
 			m_FrameSplit.x += m_FrameSplit.w;
 			m_FrameCounter = 0;
 		}
 
 		//歩きアニメーション最大コマ数（１コマ目）を超えると最初（0コマ目）に戻す
-		if (m_FrameSplit.x / m_FrameSplit.w > 18)
+		if (m_FrameSplit.x / m_FrameSplit.w > 44)
 		{
 			m_FrameSplit.x = 0;
 		}
 		break;
 	case enAction::MoveRight:	//右移動
 		//6フレーム事にアニメーション切り替え
-		if (m_FrameCounter >= 6) {
+		if (m_FrameCounter >= 44) {
 			m_FrameSplit.x += m_FrameSplit.w;
 			m_FrameCounter = 0;
 		}
 
 		//歩きアニメーション最大コマ数（１コマ目）を超えると最初（0コマ目）に戻す
-		if (m_FrameSplit.x / m_FrameSplit.w > 18)
+		if (m_FrameSplit.x / m_FrameSplit.w > 44)
 		{
 			m_FrameSplit.x = 0;
 		}
@@ -203,11 +233,19 @@ void CPlayer::Animation()
 			m_FrameSplit.x = m_FrameSplit.w * 3;//ジャンプ画像
 		}
 	}*/
+
+	if (m_Atacking == true)
+	{
+		if (m_FrameCounter >= 44) {
+			m_FrameSplit.x += m_FrameSplit.w;
+			m_FrameCounter = 0;
+		}
+	}
 	
 	//****************************************************************************
 	//この処理は画像のキャラクターを左から右に表示していく
 	m_FrameSplit.y += m_FrameSplit.h;
-	
+	m_FrameSplit.x += m_FrameSplit.w;
 	
 	
 	////右向き判定

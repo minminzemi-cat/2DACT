@@ -125,7 +125,7 @@ bool CGame::Create()
 	////プレイヤー（左向いている）の読み込み.
 	if (m_pPlayer_left_Img->LoadBmp("Data\\Image\\hidari.bmp") == false) return false;
 	////プレイヤー（アタック）の読み込み.
-	//if (m_pPlayer_atk_Img->LoadBmp("Data\\Image\\atk.bmp") == false) return false;
+	if (m_pPlayer_atk_Img->LoadBmp("Data\\Image\\atk.bmp") == false) return false;
 	
 	//ステージの読み込み.
 	if (m_pStageImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;

@@ -24,7 +24,6 @@ public:
 	void SetImage(CImage* pImg) { m_pImg = pImg; }
 
 
-
 	//ˆÊ’uî•ñ‚ğK“¾‚·‚é
 	VECTOR2 GetPosition() const { return m_Position; }
 	//‚PƒRƒ}‚Ì‰æ‘œî•ñ‚ğK“¾‚·‚é
