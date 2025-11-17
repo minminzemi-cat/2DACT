@@ -117,6 +117,7 @@ bool CGame::Create()
 	if( m_pCharaImg->LoadBmp("Data\\BMP\\chara.bmp" )	== false ) return false;
 	//“G‚Ì“Ç‚İ‚İ.
 	if (m_pEnemyImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
+	
 	//ƒ{ƒX‚Ì“Ç‚İ‚İ.
 	if (m_pBossImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
 

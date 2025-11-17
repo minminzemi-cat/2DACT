@@ -16,6 +16,8 @@ public:
 		
 		Attack,     //UŒ‚
 
+		dei,		//€–S
+
 		None = -1,	//–¢İ’è
 	};
 	public:
