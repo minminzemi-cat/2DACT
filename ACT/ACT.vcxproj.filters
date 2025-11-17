@@ -40,6 +40,9 @@
     <Filter Include="SourceCode\CGameObject\CCharacter\CBoss">
       <UniqueIdentifier>{5a1064f3-f247-4d09-9fb3-fc8197db8ea7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceCode\CGameObject\CCharacter\CBoss2">
+      <UniqueIdentifier>{3556342d-68dc-4c28-bfe4-957bbe5f4218}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Main.cpp">
@@ -80,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="SourceCode\CBoss.cpp">
       <Filter>SourceCode\CGameObject\CCharacter\CBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CBoss2.cpp">
+      <Filter>SourceCode\CGameObject\CCharacter\CBoss2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\CBoss.h">
       <Filter>SourceCode\CGameObject\CCharacter\CBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CBoss2.h">
+      <Filter>SourceCode\CGameObject\CCharacter\CBoss2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

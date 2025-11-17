@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\CBoss.cpp" />
+    <ClCompile Include="SourceCode\CBoss2.cpp" />
     <ClCompile Include="SourceCode\CCamera.cpp" />
     <ClCompile Include="SourceCode\CCharacter.cpp" />
     <ClCompile Include="SourceCode\CEnemy.cpp" />
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\CBoss.h" />
+    <ClInclude Include="SourceCode\CBoss2.h" />
     <ClInclude Include="SourceCode\CCamera.h" />
     <ClInclude Include="SourceCode\CCharacter.h" />
     <ClInclude Include="SourceCode\CEnemy.h" />
