@@ -15,6 +15,7 @@ public:
 		Wait = 0,	//‘Ò‹@
 		MoveLeft,	//¶ˆÚ“®
 		MoveRight,	//‰EˆÚ“®
+		Attack,     //UŒ‚
 
 		None = -1,	//–¢İ’è
 	};

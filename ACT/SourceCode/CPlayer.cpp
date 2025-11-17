@@ -61,10 +61,10 @@ void CPlayer::Update()
 		if (m_FrameSplit.x / m_FrameSplit.w > 44)
 		{
 			m_Atacking = false; //攻撃中解除
-
-			//音楽を追加する
-
+			m_Action=enAction::Wait;
 		}
+
+
 	}
 
 	//動作状態による処理の場合分け
@@ -136,10 +136,11 @@ void CPlayer::KeyInput()
 		
 		m_pImg = m_pImg_Atk;
 
-		if (m_Atacking = false)
+		/*if (m_Atacking == false)
 		{
-			m_Atacking = true;
-		}
+			m_Atacking = true;*/
+			m_Action = enAction::Attack ;
+		//}
 	}
 
 	//←.
@@ -213,6 +214,16 @@ void CPlayer::Animation()
 			m_FrameSplit.x = 0;
 		}
 		break;
+
+	case enAction::Attack:    //攻撃
+		//アタックアニメーション
+		
+			if (m_FrameCounter >= 44) {
+   				m_FrameSplit.x += m_FrameSplit.w;
+				m_FrameCounter = 0;
+			}
+		
+		break;
 	
 	case enAction::None:		//未設定
 		break;
@@ -234,13 +245,7 @@ void CPlayer::Animation()
 		}
 	}*/
 
-	if (m_Atacking == true)
-	{
-		if (m_FrameCounter >= 44) {
-			m_FrameSplit.x += m_FrameSplit.w;
-			m_FrameCounter = 0;
-		}
-	}
+	
 	
 	//****************************************************************************
 	//この処理は画像のキャラクターを左から右に表示していく

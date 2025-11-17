@@ -8,6 +8,16 @@
 class CBoss
 	: public CCharacter  //キャラクタークラスを継承
 {
+public:
+	//動作処理列挙型
+	enum enBossAction
+	{
+		Wait = 0,	//待機
+		
+		Attack,     //攻撃
+
+		None = -1,	//未設定
+	};
 	public:
 		CBoss();//コンストラクタ
 		~CBoss() override ;//デストラクタ
@@ -31,6 +41,7 @@ class CBoss
 
 		CHARA m_Boss;
 
+		DWORD nowTime = 0;		//現在の時間.
 
 private:
 	int			m_GroundPos;	//地面の位置（定数でも可）
