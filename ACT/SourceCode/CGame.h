@@ -109,6 +109,12 @@ private:
 	CPlayer*	m_pPlayer;		//プレイヤー
 	//-----敵機-----.
 	CEnemy* m_pEnemy;			//エネミー
+
+	//----ぼす----
+	CBoss* m_pBoss;
+	CHARA   m_Boss;
+	CBoss* m_BossHP;
+
 	//-----ステージ-----.
 	CStage* m_pStage;			//ステージ
 

@@ -1,5 +1,6 @@
 #include "CPlayer.h"
 #include"Global.h"
+#include<cmath>
 #include"CSoundManager.h"	//サウンドマネージャークラス
 #include "CBoss2.h"
 
@@ -20,6 +21,8 @@ CPlayer::CPlayer()//コンストラクタ
 	m_MoveSpeed = 4;
 
 	m_LookingRight = true;
+
+	m_PlayerHP = 100;
 }
 
 CPlayer::~CPlayer()//デストラクタ
@@ -221,10 +224,14 @@ void CPlayer::Animation()
 	case enAction::Attack:    //攻撃
 		//アタックアニメーション
 		
-			if (m_FrameCounter >= 44) {
-   				m_FrameSplit.x += m_FrameSplit.w;
-				m_FrameCounter = 0;
-			}
+		if (m_FrameCounter >= 44) {
+   			m_FrameSplit.x += m_FrameSplit.w;
+			m_FrameCounter = 0;
+		}
+		//ボスの座標をとるにはメンバー書いて(m_Boss->)さらにメンバー変数を書いてxを求める
+
+		if(CircleCollisionDetection(m_Player.x,m_Player.y,CGame::C_SIZE,m_Boss->m_Boss.x,))
+
 		
 		break;
 	
@@ -267,6 +274,23 @@ void CPlayer::Animation()
 	//	m_FrameSplit.y += m_FrameSplit.h;
 
 	//}
+}
+
+//円と円の当たり判定
+bool CircleCollisionDetection(float Ax, float Ay, float Ar, float Bx, float By, float Br)
+{
+	float dx = Ax - Bx;
+	float dy = Ay - By;
+	//sqrftは平方根
+	//#include<cmath>が必要らしい
+	float distance = sqrtf(dx * dx + dy * dy);
+
+	//命中したとき
+	if (distance < Ar + Br) {
+		return true;
+	}
+	//外れた時
+	return false;
 }
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "CCharacter.h" //キャラクタークラス
-
+#include"CGame.h"
+#include"CBoss.h"
 
 /********************************************
 *		プレイヤークラス
@@ -19,6 +20,14 @@ public:
 
 		None = -1,	//未設定
 	};
+
+	//キャラクター構造体
+	struct CHARA
+	{
+		int x;
+		int y;
+	};
+
 public:
 	CPlayer();//コンストラクタ
 	~CPlayer();//デストラクタ
@@ -48,6 +57,10 @@ private:
 	
 
 private:
+	CHARA		m_Player;
+
+	CBoss*		m_Boss;
+
 	int			m_GroundPos;	//地面の位置（定数でも可）
 
 	VECTOR2		m_OldPosition;	//移動前の座標
@@ -61,5 +74,15 @@ private:
 	float		m_JumpAcc;	//加速度:Acceleration(ジャンプ減速用)
 	float		m_JumpPower;//ジャンプ力（定数でも可）
 	float		m_Gravity;	//重力（定数でも可）
+	
+	//円と円の当たり判定
+	bool CircleCollisionDetection(
+		float Ax, float Ay, float Ar,		//円Aのｘ、ｙ座標と半径
+		float Bx, float By, float Br);		//円Bのｘ、ｙ座標と半径
+
+	//プレイヤーのHP
+	int        m_PlayerHP = 100;
+
+
 
 };

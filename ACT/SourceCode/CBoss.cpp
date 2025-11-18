@@ -1,5 +1,6 @@
 #include "CBoss.h"
 #include"Global.h"
+#include<cmath>
 #include"CSoundManager.h"	//サウンドマネージャークラス
 
 
@@ -7,7 +8,7 @@ CBoss::CBoss()
 	:m_GroundPos()
 	, m_Atak1()
 	, m_Atak2()
-	, m_Boss()
+	, m_Boss({500,10})
 	, m_Action(enBossAction::Wait)
 	,m_Atacking(false)
 {
@@ -19,23 +20,53 @@ CBoss::~CBoss()
 
 void CBoss::Update()
 {
+	//毎フレーム左方向に動き続ける
+	//m_Boss.x -= 1;
 
-	m_Boss.x = 500;
-	m_Boss.y = 0;
-
-	m_Action = enBossAction::Wait;
 
 	//アタック中の処理
-	if (m_Atacking == true)
+	if (m_Action == enBossAction::Attack)
 	{
 		//すべてのアニメーションを描画し終えたら終わり
-		if (m_FrameSplit.x / m_FrameSplit.w > 12)
+		if ((1840 - m_FrameSplit.x) / m_FrameSplit.w > 12)
 		{
-			m_Atacking = false; //攻撃中解除
-			m_Action = enBossAction::Wait;
+			m_FrameSplit.x = 1840 - 80; //攻撃アニメーション最初の位置に戻す
+			m_FrameCounter = 0;
 		}
+	}
 
+	if (BossHP == 0) {
+		m_Action = enBossAction::dei;
 
+		//死亡中の処理
+		if (m_Action == enBossAction::dei)
+		{
+			//すべてのアニメーションを描画し終えたら終わり
+			if ((800 - m_FrameSplit.x) / m_FrameSplit.w > 23)
+			{
+				m_FrameSplit.x = 800 - 80; //死亡アニメーション最初の位置に戻す
+				m_FrameCounter = 0;
+			}
+		}
+	}
+	if (nowTime / 10 == 0) {
+		m_Action = enBossAction::Attack;
+	}
+	
+	//動作状態による処理の場合分け
+	switch (m_Action) {
+	case enBossAction::Wait:
+		break;
+	case enBossAction::Attack:
+		
+		break;
+	case enBossAction::dei:	
+		m_Action = true;
+		break;
+	case enBossAction::None:
+		break;
+	default:
+		break;
 	}
 }
 
@@ -62,18 +93,18 @@ void CBoss::Animation()
 	m_FrameCounter++;
 
 	//僕の画像はこの大きさでないとだめ
-	m_FrameSplit.w = 128;
-	m_FrameSplit.h = 64;
+	m_FrameSplit.w = 80;
+	m_FrameSplit.h = 80;
 	m_FrameSplit.y = 0;
 
 	switch (m_Action) {
 	case enBossAction::Wait:
-		m_FrameSplit.x = 1840;//待機画像（０コマ目）
+		m_FrameSplit.x = 1840-80;//待機画像（０コマ目）
 		m_FrameSplit.y = 0;
 		m_FrameCounter = 0;//待機アニメーションないので0にしておく
 		break;
 	case enBossAction::Attack:
-		m_FrameSplit.y = 240;
+		m_FrameSplit.y = 240-80;
 		if (m_FrameCounter >= 12) {
 			m_FrameSplit.x -= m_FrameSplit.w;
 			m_FrameCounter = 0;
@@ -83,6 +114,7 @@ void CBoss::Animation()
 		m_FrameSplit.y = 400;
 		if (m_FrameCounter >= 22) {
 			m_FrameSplit.x -= m_FrameSplit.w;
+			m_FrameSplit.y += m_FrameSplit.h;
 			m_FrameCounter = 0;
 		}
 		break;
@@ -91,5 +123,22 @@ void CBoss::Animation()
 	default:
 		break;
 	}
+}
+
+//円と円の当たり判定
+bool CircleCollisionDetection(float Ax, float Ay, float Ar, float Bx, float By, float Br)
+{
+	float dx = Ax - Bx;
+	float dy = Ay - By;
+	//sqrftは平方根
+	//#include<cmath>が必要らしい
+	float distance = sqrtf(dx * dx + dy * dy);
+
+	//命中したとき
+	if (distance < Ar + Br) {
+		return true;
+	}
+	//外れた時
+	return false;
 }
 

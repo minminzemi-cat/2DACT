@@ -215,6 +215,7 @@ void CGame::Destroy()
 	SAFE_DELETE(m_pPlayer_right_Img);
 	SAFE_DELETE(m_pPlayer_left_Img);
 	SAFE_DELETE(m_pPlayer_atk_Img);
+	SAFE_DELETE(m_pBossImg);
 	SAFE_DELETE(m_pEnemyImg);
 	SAFE_DELETE(m_pCharaImg);
 	SAFE_DELETE(m_pBackImg);
@@ -280,10 +281,15 @@ void CGame::Update()
 					PostMessage(m_pGameWnd->hWnd, WM_CLOSE, 0, 0);
 				}
 
-				if (GetAsyncKeyState(VK_RETURN) & 0x0001)
+				if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE,
+					m_Boss.x, m_Boss.y, C_SIZE))
 				{
-					m_Scene = enScene::GameOver;
+					//++++++++++++++++++++++++++++++++++++++++++++++++++++
+					//ここにプレイヤーのHPゲージが減る処理を書く
 				}
+				
+					//m_Scene = enScene::GameOver;
+				
 		break;
 		case enScene::GameOver://ゲームオーバー
 			//F1キー.
