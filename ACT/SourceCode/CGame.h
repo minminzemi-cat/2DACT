@@ -130,7 +130,6 @@ private:
 	//-----ƒJƒƒ‰------
 	CCamera* m_pCamera;
 
-	CBoss* m_pBoss;			//ƒ{ƒX
 };
 
 

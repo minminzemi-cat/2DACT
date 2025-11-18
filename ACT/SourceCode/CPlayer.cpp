@@ -230,7 +230,11 @@ void CPlayer::Animation()
 		}
 		//ボスの座標をとるにはメンバー書いて(m_Boss->)さらにメンバー変数を書いてxを求める
 
-		if(CircleCollisionDetection(m_Player.x,m_Player.y,CGame::C_SIZE,m_Boss->m_Boss.x,))
+		if (CircleCollisionDetection(m_Player.x, m_Player.y, CGame::C_SIZE,
+			m_Boss->m_Boss.x, m_Boss->m_Boss.y, CGame::C_SIZE))
+		{
+			m_Boss->BossHP -= 10;
+		}
 
 		
 		break;
