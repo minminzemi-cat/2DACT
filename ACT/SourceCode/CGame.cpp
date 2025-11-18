@@ -119,7 +119,7 @@ bool CGame::Create()
 	if (m_pEnemyImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
 	
 	//ボスの読み込み.
-	if (m_pBossImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
+	if (m_pBossImg->LoadBmp("Data\\Image\\Boss.bmp") == false) return false;
 
 	////プレイヤー(右向いている)の読み込み.
 	if (m_pPlayer_right_Img->LoadBmp("Data\\Image\\migi.bmp") == false) return false;
@@ -264,6 +264,9 @@ void CGame::Update()
 				//エネミー動作
 				m_pEnemy->Update();
 
+				//ボス動作
+				m_pBoss->Update();
+
 				//ステージ動作
 				m_pStage->Update();
 
@@ -315,6 +318,9 @@ void CGame::Draw()
 
 		//プレイヤー描画
 		m_pPlayer->Draw( m_pCamera );
+
+		//ボスを描画
+		m_pBoss->Draw(m_pCamera);
 
 		//エネミー描画
 		m_pEnemy->Draw( m_pCamera);

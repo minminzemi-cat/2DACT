@@ -10,13 +10,13 @@ class CBoss2
 {
 public:
 	//“®ìˆ——ñ‹“Œ^
-	enum enBossAction
+	enum enBoss2Action
 	{
 		Wait = 0,	//‘Ò‹@
 
 		Attack,     //UŒ‚
 
-		dei,		//€–S
+		Dei,		//€–S
 
 		None = -1,	//–¢İ’è
 	};
@@ -44,5 +44,7 @@ public:
 	void Animation();
 
 	CHARA		m_Boss2;
+
+	bool		m_Atacking;		//UŒ‚’†
 
 };

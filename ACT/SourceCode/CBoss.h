@@ -24,6 +24,18 @@ public:
 		CBoss();//コンストラクタ
 		~CBoss() override ;//デストラクタ
 
+public:
+	//動作処理列挙型
+	enum enBossAction
+	{
+		Wait = 0,	//待機
+
+		Attack,     //攻撃
+
+		Dei,		//死亡
+
+		None = -1,	//未設定
+	};
 		//キャラクター構造体
 		struct CHARA
 		{
@@ -38,12 +50,12 @@ public:
 		void Draw(CCamera* pCamera) override;
 		//アニメーション処理
 		void Animation();
-		void AttackPattern1();
-		void AttackPattern2();
-
+		
 		CHARA m_Boss;
 
 		DWORD nowTime = 0;		//現在の時間.
+
+		bool	m_Atacking;		//攻撃中
 
 private:
 	int			m_GroundPos;	//地面の位置（定数でも可）
@@ -51,5 +63,9 @@ private:
 	//攻撃の処理
 	bool	m_Atak1;
 	bool	m_Atak2;
+
+	int  	m_Action;
+
+	
 
 };

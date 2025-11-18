@@ -1,6 +1,7 @@
 #include "CPlayer.h"
 #include"Global.h"
 #include"CSoundManager.h"	//サウンドマネージャークラス
+#include "CBoss2.h"
 
 CPlayer::CPlayer()//コンストラクタ
 	:m_GroundPos	(WND_H - 64)
@@ -170,6 +171,8 @@ void CPlayer::KeyInput()
 	}
 
 }
+
+
 
 //アニメーション処理
 void CPlayer::Animation()
