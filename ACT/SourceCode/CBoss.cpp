@@ -8,7 +8,7 @@ CBoss::CBoss()
 	:m_GroundPos()
 	, m_Atak1()
 	, m_Atak2()
-	, m_Boss({500,400})
+	, m_Boss({500,300})
 	, m_Action(enBossAction::Wait)
 	,m_Atacking(false)
 {
@@ -28,9 +28,9 @@ void CBoss::Update()
 	if (m_Action == enBossAction::Attack)
 	{
 		//すべてのアニメーションを描画し終えたら終わり
-		if ((1840 - m_FrameSplit.x) / m_FrameSplit.w > 12)
+		if ((3680 - m_FrameSplit.x) / m_FrameSplit.w > 12)
 		{
-			m_FrameSplit.x = 1840 - 80; //攻撃アニメーション最初の位置に戻す
+			m_FrameSplit.x = 3680 - 167.273; //攻撃アニメーション最初の位置に戻す
 			m_FrameCounter = 0;
 		}
 	}
@@ -44,7 +44,7 @@ void CBoss::Update()
 			//すべてのアニメーションを描画し終えたら終わり
 			if ((800 - m_FrameSplit.x) / m_FrameSplit.w > 23)
 			{
-				m_FrameSplit.x = 800 - 80; //死亡アニメーション最初の位置に戻す
+				m_FrameSplit.x = 800 - 160; //死亡アニメーション最初の位置に戻す
 				m_FrameCounter = 0;
 			}
 		}
@@ -76,6 +76,7 @@ void CBoss::Draw(CCamera* pCamera)
 	//アニメーション処理
 	Animation();
 
+	//この本体はキャラクタークラスにある　親クラス
 	m_Position = { m_Boss.x, m_Boss.y };
 	VECTOR2 DispPos1 = pCamera->CalcToPositionInCamera(&m_Position, &m_FrameSplit);
 
@@ -97,25 +98,26 @@ void CBoss::Animation()
 	m_FrameCounter++;
 
 	//僕の画像はこの大きさでないとだめ
-	m_FrameSplit.w = 80;
-	m_FrameSplit.h = 80;
+	m_FrameSplit.w = 170;
+	m_FrameSplit.h = 200;
 	m_FrameSplit.y = 0;
 
 	switch (m_Action) {
 	case enBossAction::Wait:
-		m_FrameSplit.x = 1840-80;//待機画像（０コマ目）
+		m_FrameSplit.x = 3680-167;//待機画像（０コマ目）
 		m_FrameSplit.y = 0;
 		m_FrameCounter = 0;//待機アニメーションないので0にしておく
 		break;
 	case enBossAction::Attack:
-		m_FrameSplit.y = 240-80;
+		//m_FrameSplit.x = 3680 - 160;//待機画像（０コマ目）
+		m_FrameSplit.y = 480-160;
 		if (m_FrameCounter >= 12) {
 			m_FrameSplit.x -= m_FrameSplit.w;
 			m_FrameCounter = 0;
 		}
 		break;
 	case enBossAction::dei:
-		m_FrameSplit.y = 400;
+		m_FrameSplit.y = 800-160;
 		if (m_FrameCounter >= 22) {
 			m_FrameSplit.x -= m_FrameSplit.w;
 			m_FrameSplit.y += m_FrameSplit.h;
