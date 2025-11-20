@@ -1,6 +1,5 @@
 #pragma once
 #include "CCharacter.h" //キャラクタークラス
-#include"CGame.h"
 #include"CBoss.h"
 
 /********************************************

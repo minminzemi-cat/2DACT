@@ -8,7 +8,7 @@ CBoss::CBoss()
 	:m_GroundPos()
 	, m_Atak1()
 	, m_Atak2()
-	, m_Boss({500,10})
+	, m_Boss({500,400})
 	, m_Action(enBossAction::Wait)
 	,m_Atacking(false)
 {
@@ -75,9 +75,13 @@ void CBoss::Draw(CCamera* pCamera)
 	//アニメーション処理
 	Animation();
 
+	//VECTOR2 DispPos1 = pCamera->CalcToPositionInCamera(&m_Position, &m_FrameSplit);
+
 	m_pImg->TransBlt(
-		m_Boss.x,		//表示位置x座標
-		m_Boss.y,		//表示位置y座標.
+		//DispPos1.x,		//表示位置x座標
+		//DispPos1.y,		//表示位置y座標.
+		m_Boss.x,
+		m_Boss.y,
 		m_FrameSplit.w,		//画像幅
 		m_FrameSplit.h,		//画像高さ.
 		m_FrameSplit.x,		//元画像x座標.
@@ -125,20 +129,4 @@ void CBoss::Animation()
 	}
 }
 
-//円と円の当たり判定
-bool CircleCollisionDetection(float Ax, float Ay, float Ar, float Bx, float By, float Br)
-{
-	float dx = Ax - Bx;
-	float dy = Ay - By;
-	//sqrftは平方根
-	//#include<cmath>が必要らしい
-	float distance = sqrtf(dx * dx + dy * dy);
-
-	//命中したとき
-	if (distance < Ar + Br) {
-		return true;
-	}
-	//外れた時
-	return false;
-}
 

@@ -29,6 +29,7 @@ public:
 		{
 			int x;
 			int y;
+			int state;
 		};
 		
 		//“®ìŠÖ”
@@ -56,9 +57,5 @@ private:
 
 	int  	m_Action;
 
-	//‰~‚Æ‰~‚Ì“–‚½‚è”»’è
-	bool CircleCollisionDetection(
-		float Ax, float Ay, float Ar,		//‰~A‚Ì‚˜A‚™À•W‚Æ”¼Œa
-		float Bx, float By, float Br);		//‰~B‚Ì‚˜A‚™À•W‚Æ”¼Œa
 
 };

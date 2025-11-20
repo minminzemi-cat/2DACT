@@ -51,6 +51,12 @@ void CGame::InitializeGame()
 	m_Player.state = enCharaState::Living;	//生存中.
 	m_Player.ExpAnimCnt = 0;
 
+	//ボスの初期配置.
+	m_pBoss->m_Boss.x = (WND_W / 2) - (C_SIZE / 2);
+	m_pBoss->m_Boss.y = WND_H - (C_SIZE + 16);	//補正:画面下からキャラ1体分+16上の位置.
+	m_pBoss->m_Boss.state = enCharaState::Living;	//生存中.
+	//m_Boss.ExpAnimCnt = 0;
+
 
 }
 
@@ -282,12 +288,19 @@ void CGame::Update()
 				}
 
 				if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE,
-					m_Boss.x, m_Boss.y, C_SIZE))
+					m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE))
 				{
 					//++++++++++++++++++++++++++++++++++++++++++++++++++++
 					//ここにプレイヤーのHPゲージが減る処理を書く
 				}
 				
+				if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE / 2,
+					m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE / 2))
+				{
+
+				}
+
+
 					//m_Scene = enScene::GameOver;
 				
 		break;

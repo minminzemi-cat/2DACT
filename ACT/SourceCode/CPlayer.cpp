@@ -230,9 +230,7 @@ void CPlayer::Animation()
 		}
 		//ボスの座標をとるにはメンバー書いて(m_Boss->)さらにメンバー変数を書いてxを求める
 
-		if(CircleCollisionDetection(m_Player.x,m_Player.y,CGame::C_SIZE,m_Boss->m_Boss.x,))
-
-		
+	
 		break;
 	
 	case enAction::None:		//未設定
@@ -277,20 +275,20 @@ void CPlayer::Animation()
 }
 
 //円と円の当たり判定
-bool CircleCollisionDetection(float Ax, float Ay, float Ar, float Bx, float By, float Br)
-{
-	float dx = Ax - Bx;
-	float dy = Ay - By;
-	//sqrftは平方根
-	//#include<cmath>が必要らしい
-	float distance = sqrtf(dx * dx + dy * dy);
-
-	//命中したとき
-	if (distance < Ar + Br) {
-		return true;
-	}
-	//外れた時
-	return false;
-}
+//bool CircleCollisionDetection(float Ax, float Ay, float Ar, float Bx, float By, float Br)
+//{
+//	float dx = Ax - Bx;
+//	float dy = Ay - By;
+//	//sqrftは平方根
+//	//#include<cmath>が必要らしい
+//	float distance = sqrtf(dx * dx + dy * dy);
+//
+//	//命中したとき
+//	if (distance < Ar + Br) {
+//		return true;
+//	}
+//	//外れた時
+//	return false;
+//}
 
 

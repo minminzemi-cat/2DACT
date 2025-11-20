@@ -112,7 +112,6 @@ private:
 
 	//----ぼす----
 	CBoss* m_pBoss;
-	CHARA   m_Boss;
 	CBoss* m_BossHP;
 
 	//-----ステージ-----.
@@ -130,7 +129,6 @@ private:
 	//-----カメラ------
 	CCamera* m_pCamera;
 
-	CBoss* m_pBoss;			//ボス
 };
 
 
