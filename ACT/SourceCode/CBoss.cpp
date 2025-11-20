@@ -70,18 +70,18 @@ void CBoss::Update()
 	}
 }
 
+//描画関数
 void CBoss::Draw(CCamera* pCamera)
 {
 	//アニメーション処理
 	Animation();
 
-	//VECTOR2 DispPos1 = pCamera->CalcToPositionInCamera(&m_Position, &m_FrameSplit);
+	m_Position = { m_Boss.x, m_Boss.y };
+	VECTOR2 DispPos1 = pCamera->CalcToPositionInCamera(&m_Position, &m_FrameSplit);
 
 	m_pImg->TransBlt(
-		//DispPos1.x,		//表示位置x座標
-		//DispPos1.y,		//表示位置y座標.
-		m_Boss.x,
-		m_Boss.y,
+		DispPos1.x,		//表示位置x座標
+		DispPos1.y,		//表示位置y座標.
 		m_FrameSplit.w,		//画像幅
 		m_FrameSplit.h,		//画像高さ.
 		m_FrameSplit.x,		//元画像x座標.
