@@ -90,6 +90,8 @@ private:
 	CImage*		m_pCharaImg;		//キャラクター画像.
 	CImage*		m_pEnemyImg;		//敵画像.
 	CImage*     m_pBossImg;     //ボス画像.
+	CImage*		m_pExplosion01_Img;  //爆発アニメーション画像01
+
 	CImage*		m_pPlayer_right_Img;	//プレイヤー(右向き)画像
 	CImage*		m_pPlayer_left_Img;	//プレイヤー（左向き）画像
 	CImage*		m_pPlayer_atk_Img;	//プレイヤー（アタック）画像

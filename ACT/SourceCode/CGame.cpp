@@ -20,6 +20,7 @@ CGame::CGame(GameWindow* pGameWnd)
 	, m_pCharaImg(nullptr)
 	, m_pEnemyImg(nullptr)
 	, m_pBossImg(nullptr)
+	, m_pExplosion01_Img(nullptr)
 	, m_pPlayer_right_Img(nullptr)
 	, m_pPlayer_left_Img(nullptr)
 	, m_pPlayer_atk_Img(nullptr)
@@ -101,6 +102,9 @@ bool CGame::Create()
 	//ボス画像のインスタンス生成
 	m_pBossImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
+	//爆発画像のインスタンス生成
+	m_pExplosion01_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+
 	//プレイヤー（右向いている）画像のインスタンス生成
 	m_pPlayer_right_Img= new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//プレイヤー（左向いている）画像のインスタンス生成
@@ -132,6 +136,9 @@ bool CGame::Create()
 	
 	//ボスの読み込み.
 	if (m_pBossImg->LoadBmp("Data\\Image\\Boss.bmp") == false) return false;
+
+	//爆発の読み込み
+	if (m_pExplosion01_Img->LoadBmp("Data\\Image\\Explosion.bmp") == false) return false;
 
 	////プレイヤー(右向いている)の読み込み.
 	if (m_pPlayer_right_Img->LoadBmp("Data\\Image\\migi.bmp") == false) return false;
@@ -170,8 +177,8 @@ bool CGame::Create()
 	//ボスのインスタンス生成
 	m_pBoss = new CBoss();
 	//画像の設定
-	m_pBoss->SetImage(m_pBossImg);
-
+	m_pBoss->TwoSetImage(m_pBossImg, m_pExplosion01_Img);
+	
 
 
 	//ステージのインスタンス生成
@@ -233,6 +240,7 @@ void CGame::Destroy()
 	SAFE_DELETE(m_pPlayer_right_Img);
 	SAFE_DELETE(m_pPlayer_left_Img);
 	SAFE_DELETE(m_pPlayer_atk_Img);
+	SAFE_DELETE(m_pExplosion01_Img);
 	SAFE_DELETE(m_pBossImg);
 	SAFE_DELETE(m_pEnemyImg);
 	SAFE_DELETE(m_pCharaImg);
@@ -299,12 +307,13 @@ void CGame::Update()
 					PostMessage(m_pGameWnd->hWnd, WM_CLOSE, 0, 0);
 				}
 
+				//*****************************************************************
 				//プレイヤーがアタック状態のときの当たり判定
 				if (m_pPlayer->Attack) {
 					if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE,
 						m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE))
 					{
-						m_pBoss->BossHP - 1;
+						m_pBoss->BossHP - 10000000;
 					}
 				}
 				
@@ -315,9 +324,11 @@ void CGame::Update()
 					{
 						//ここにプレイヤーのHPゲージが減る処理を書く
 						
-
+						m_pPlayer->m_PlayerHP - 10;
 					}
 				}
+
+				//*****************************************************************
 
 				if (m_pPlayer->m_PlayerHP == 0)
 				{

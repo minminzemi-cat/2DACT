@@ -1,6 +1,7 @@
 #pragma once
 #include"CCharacter.h"		//キャラクタークラス
 
+
 /**********************************
 * 		ボスクラス
 *	***/
@@ -17,6 +18,8 @@ public:
 		Attack,     //攻撃
 
 		dei,		//死亡
+		
+		Explosion,
 
 		None = -1,	//未設定
 	};
@@ -37,8 +40,19 @@ public:
 								//		仮想関数でない場合はエラーになる
 		//描画関数
 		void Draw(CCamera* pCamera) override;
+
+		void TwoSetImage(CImage* pImg, CImage* pImg2)
+		{
+			m_pImg = pImg;
+			m_pBossImg = pImg;
+			m_pExplosion01_Img= pImg2;
+		}
+
 		//アニメーション処理
 		void Animation();
+
+		//爆発アニメーション
+		void ExplosionAnimation();
 		
 		CHARA m_Boss;
 
@@ -50,6 +64,9 @@ public:
 
 private:
 	int			m_GroundPos;	//地面の位置（定数でも可）
+
+	CImage* m_pBossImg;
+	CImage* m_pExplosion01_Img;
 
 	//攻撃の処理
 	bool	m_Atak1;

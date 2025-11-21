@@ -11,6 +11,8 @@ CBoss::CBoss()
 	, m_Boss({500,340})
 	, m_Action(enBossAction::Wait)
 	,m_Atacking(false)
+	,m_pBossImg(m_pImg)
+	,m_pExplosion01_Img(m_pImg2)
 {
 }
 
@@ -34,9 +36,15 @@ void CBoss::Update()
 			m_FrameCounter = 0;
 		}
 	}
-
+	m_Action = enBossAction::Explosion;
+	//すべてのアニメーションを描画し終えたら終わり
+	if (( m_FrameSplit.x) / m_FrameSplit.w > 11)
+	{
+		m_FrameSplit.x = 384; //攻撃アニメーション最初の位置に戻す
+		m_FrameCounter = 0;
+	}
 	if (BossHP == 0) {
-		m_Action = enBossAction::dei;
+		
 
 		//死亡中の処理
 		if (m_Action == enBossAction::dei)
@@ -50,7 +58,7 @@ void CBoss::Update()
 		}
 	}
 	if (nowTime / 10 == 0) {
-		m_Action = enBossAction::Attack;
+		//m_Action = enBossAction::Attack;
 	}
 	
 	//動作状態による処理の場合分け
@@ -60,8 +68,11 @@ void CBoss::Update()
 	case enBossAction::Attack:
 		
 		break;
-	case enBossAction::dei:	
+	case enBossAction::dei:
 		m_Action = true;
+		break;
+	case enBossAction::Explosion:
+		m_pImg = m_pExplosion01_Img;
 		break;
 	case enBossAction::None:
 		break;
@@ -77,6 +88,8 @@ void CBoss::Draw(CCamera* pCamera)
 	Animation();
 
 	//この本体はキャラクタークラスにある　親クラス
+	//m_pImg = m_pBossImg;
+
 	m_Position = { m_Boss.x, m_Boss.y };
 	VECTOR2 DispPos1 = pCamera->CalcToPositionInCamera(&m_Position, &m_FrameSplit);
 
@@ -87,8 +100,6 @@ void CBoss::Draw(CCamera* pCamera)
 		m_FrameSplit.h,		//画像高さ.
 		m_FrameSplit.x,		//元画像x座標.
 		m_FrameSplit.y);	//元画像y座標.
-
-
 	
 }
 
@@ -116,6 +127,16 @@ void CBoss::Animation()
 			m_FrameCounter = 0;
 		}
 		break;
+	case enBossAction::Explosion:
+		
+
+		
+
+
+		ExplosionAnimation();
+
+		break;
+
 	case enBossAction::dei:
 		m_FrameSplit.y = 800-160;
 		if (m_FrameCounter >= 22) {
@@ -131,4 +152,18 @@ void CBoss::Animation()
 	}
 }
 
-
+void  CBoss::ExplosionAnimation()
+{
+	
+	
+	m_FrameSplit.w = 384;
+	m_FrameSplit.h = 384;
+	m_FrameSplit.y = 0;
+		//僕の画像はこの大きさでないとだめ
+		if (m_FrameCounter >= 11) {
+			m_FrameSplit.x += m_FrameSplit.w;
+	
+			m_FrameCounter = 0;
+		}
+	
+}
