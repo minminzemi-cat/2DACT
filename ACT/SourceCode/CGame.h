@@ -94,6 +94,8 @@ private:
 	CImage*		m_pPlayer_left_Img;	//プレイヤー（左向き）画像
 	CImage*		m_pPlayer_atk_Img;	//プレイヤー（アタック）画像
 
+	CImage*		m_pHPgeziImg;			//HPゲージ画像
+
 	CImage*		m_pStageImg;	//ステージ画像
 
 	//タイトル画面とエンディング画面の画像を入れる

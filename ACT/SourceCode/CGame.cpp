@@ -10,24 +10,25 @@ CGame::CGame()
 }
 
 //コンストラクタ(引数あり).
-CGame::CGame( GameWindow* pGameWnd )
-	: m_pGameWnd	( pGameWnd )
-	, m_hMemDC		( nullptr )
-	, m_hWorkDC		( nullptr )
-	, m_hWorkBmp	( nullptr )
-	, m_hFont		( nullptr )
-	, m_pBackImg	( nullptr )
-	, m_pCharaImg	( nullptr )
-	, m_pEnemyImg	( nullptr )
-	, m_pBossImg    (nullptr)
-	, m_pPlayer_right_Img  ( nullptr )
-	, m_pPlayer_left_Img	(nullptr)
-	, m_pPlayer_atk_Img		(nullptr)
-	, m_pStageImg	( nullptr )
-	, m_Player		()
-	, m_pPlayer		( nullptr )
-	, m_pEnemy		( nullptr )
-	, m_pBoss		( nullptr)
+CGame::CGame(GameWindow* pGameWnd)
+	: m_pGameWnd(pGameWnd)
+	, m_hMemDC(nullptr)
+	, m_hWorkDC(nullptr)
+	, m_hWorkBmp(nullptr)
+	, m_hFont(nullptr)
+	, m_pBackImg(nullptr)
+	, m_pCharaImg(nullptr)
+	, m_pEnemyImg(nullptr)
+	, m_pBossImg(nullptr)
+	, m_pPlayer_right_Img(nullptr)
+	, m_pPlayer_left_Img(nullptr)
+	, m_pPlayer_atk_Img(nullptr)
+	, m_pStageImg(nullptr)
+	, m_Player()
+	, m_pPlayer(nullptr)
+	, m_pEnemy(nullptr)
+	, m_pBoss(nullptr)
+	, m_pHPgeziImg(nullptr)
 	, m_pStage		( nullptr )
 	, m_Scene(enScene::Title)
 	, m_pTitleImg	( nullptr )
@@ -99,21 +100,26 @@ bool CGame::Create()
 	m_pEnemyImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//ボス画像のインスタンス生成
 	m_pBossImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
-	//プレイヤー画像のインスタンス生成
-	m_pPlayer_right_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
-	//プレイヤー画像のインスタンス生成
-	m_pPlayer_left_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
-	//プレイヤー画像のインスタンス生成
+
+	//プレイヤー（右向いている）画像のインスタンス生成
+	m_pPlayer_right_Img= new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	//プレイヤー（左向いている）画像のインスタンス生成
+	m_pPlayer_left_Img= new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	//プレイヤー(アタック)画像のインスタンス生成
 	m_pPlayer_atk_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+
+	//HPゲージの画像のインスタンス生成
+	m_pHPgeziImg	=		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+
 	//ステージ画像のインスタンス生成
-	m_pTitleImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	m_pTitleImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//ゲームオーバー画像のインスタンス生成
-	m_pGameOverImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	m_pGameOverImg =	new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//タイトル画像のインスタンス生成
-	m_pEndingImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	m_pEndingImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
 	//エンディング画像のインスタンス生成
-	m_pStageImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	m_pStageImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	
 
 
@@ -133,6 +139,9 @@ bool CGame::Create()
 	if (m_pPlayer_left_Img->LoadBmp("Data\\Image\\hidari.bmp") == false) return false;
 	////プレイヤー（アタック）の読み込み.
 	if (m_pPlayer_atk_Img->LoadBmp("Data\\Image\\atk.bmp") == false) return false;
+
+	//HPゲージの読み込み
+	if (m_pHPgeziImg->LoadBmp("Data\\Image\\PlayerHP01.bmp") == false) return false;
 	
 	//ステージの読み込み.
 	if (m_pStageImg->LoadBmp("Data\\Image\\SwitchPlace_lite.bmp") == false) return false;
@@ -162,6 +171,8 @@ bool CGame::Create()
 	m_pBoss = new CBoss();
 	//画像の設定
 	m_pBoss->SetImage(m_pBossImg);
+
+
 
 	//ステージのインスタンス生成
 	m_pStage = new CStage();
@@ -218,6 +229,7 @@ void CGame::Destroy()
 	SAFE_DELETE(m_pGameOverImg);
 	SAFE_DELETE(m_pTitleImg);
 	SAFE_DELETE(m_pStageImg);
+	SAFE_DELETE(m_pHPgeziImg);
 	SAFE_DELETE(m_pPlayer_right_Img);
 	SAFE_DELETE(m_pPlayer_left_Img);
 	SAFE_DELETE(m_pPlayer_atk_Img);
@@ -287,21 +299,30 @@ void CGame::Update()
 					PostMessage(m_pGameWnd->hWnd, WM_CLOSE, 0, 0);
 				}
 
-				if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE,
-					m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE))
-				{
-					//++++++++++++++++++++++++++++++++++++++++++++++++++++
-					//ここにプレイヤーのHPゲージが減る処理を書く
+				//プレイヤーがアタック状態のときの当たり判定
+				if (m_pPlayer->Attack) {
+					if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE,
+						m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE))
+					{
+						m_pBoss->BossHP - 1;
+					}
 				}
 				
-				if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE / 2,
-					m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE / 2))
-				{
+				//ボスが攻撃中のプレイヤーとの当たり判定
+				if (m_pBoss->Attack) {
+					if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE / 2,
+						m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE / 2))
+					{
+						//ここにプレイヤーのHPゲージが減る処理を書く
+						
 
+					}
 				}
 
-
-					//m_Scene = enScene::GameOver;
+				if (m_pPlayer->m_PlayerHP == 0)
+				{
+					m_Scene = enScene::GameOver;
+				}
 				
 		break;
 		case enScene::GameOver://ゲームオーバー
@@ -343,7 +364,76 @@ void CGame::Draw()
 
 		//エネミー描画
 		m_pEnemy->Draw( m_pCamera);
-		
+
+
+		//++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		//		プレイヤーのHPゲージ
+
+		if (m_pPlayer->m_PlayerHP == 100)
+		{
+			//画像の表示させたい場所と画像の座標を求める
+			m_pHPgeziImg->TransBlt(
+				10,					//表示位置x座標
+				10,					//表示位置y座標.
+				143,				//画像幅
+				50,					//画像高さ.
+				0,					//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ
+				0);					//元画像y座標.
+			//意味合い
+			//143,50はHP画像の幅と高さでo,oは開始位置　
+			//開始位置０，０から幅143、高さ50の画像を取り出しますよ
+			
+		}
+		else if (m_pPlayer->m_PlayerHP == 70)
+		{
+			//画像の表示させたい場所と画像の座標を求める
+			m_pHPgeziImg->TransBlt(
+				10,					//表示位置x座標
+				10,					//表示位置y座標.
+				143,				//画像幅
+				50,					//画像高さ.
+				//取り出し開始位置
+				143,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ
+				0);					//元画像y座標.
+		}
+
+		else if (m_pPlayer->m_PlayerHP == 50)
+		{
+			//画像の表示させたい場所と画像の座標を求める
+			m_pHPgeziImg->TransBlt(
+				10,					//表示位置x座標
+				10,					//表示位置y座標.
+				143,				//画像幅
+				50,					//画像高さ.
+				//取り出し開始位置
+				143*2,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ 286
+				0);					//元画像y座標.
+		}
+		else if (m_pPlayer->m_PlayerHP == 30)
+		{
+			//画像の表示させたい場所と画像の座標を求める
+			m_pHPgeziImg->TransBlt(
+				10,					//表示位置x座標
+				10,					//表示位置y座標.
+				143,				//画像幅
+				50,					//画像高さ.
+				//取り出し開始位置
+				143*3,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ  429,
+				0);					//元画像y座標.
+		}
+		else {
+			//画像の表示させたい場所と画像の座標を求める
+			m_pHPgeziImg->TransBlt(
+				10,					//表示位置x座標
+				10,					//表示位置y座標.
+				143,				//画像幅
+				50,					//画像高さ.
+				//取り出し開始位置
+				143*4,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ
+				0);					//元画像y座標.
+		}
+
+		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 		break;
 	case enScene::GameOver://ゲームオーバー

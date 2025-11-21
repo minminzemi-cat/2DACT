@@ -8,7 +8,7 @@ CBoss::CBoss()
 	:m_GroundPos()
 	, m_Atak1()
 	, m_Atak2()
-	, m_Boss({500,300})
+	, m_Boss({500,340})
 	, m_Action(enBossAction::Wait)
 	,m_Atacking(false)
 {
@@ -98,7 +98,7 @@ void CBoss::Animation()
 	m_FrameCounter++;
 
 	//–l‚Ì‰æ‘œ‚Í‚±‚Ì‘å‚«‚³‚Å‚È‚¢‚Æ‚¾‚ß
-	m_FrameSplit.w = 170;
+	m_FrameSplit.w = 160;
 	m_FrameSplit.h = 200;
 	m_FrameSplit.y = 0;
 

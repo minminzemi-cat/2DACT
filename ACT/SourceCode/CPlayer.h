@@ -44,6 +44,10 @@ public:
 		m_pImg_Left = pImg2;
 		m_pImg_Atk = pImg3;
 	}
+
+	//プレイヤーのHP
+	int        m_PlayerHP = 100;
+
 private:
 	//操作処理
 	void KeyInput();
@@ -74,13 +78,8 @@ private:
 	float		m_JumpPower;//ジャンプ力（定数でも可）
 	float		m_Gravity;	//重力（定数でも可）
 	
-	//円と円の当たり判定
-	bool CircleCollisionDetection(
-		float Ax, float Ay, float Ar,		//円Aのｘ、ｙ座標と半径
-		float Bx, float By, float Br);		//円Bのｘ、ｙ座標と半径
 
-	//プレイヤーのHP
-	int        m_PlayerHP = 100;
+
 
 
 
