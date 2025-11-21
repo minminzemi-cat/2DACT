@@ -58,7 +58,7 @@ void CBoss::Update()
 		}
 	}
 	if (nowTime / 10 == 0) {
-		//m_Action = enBossAction::Attack;
+		////m_Action = enBossAction::Attack;
 	}
 	
 	//“®ìó‘Ô‚É‚æ‚éˆ—‚Ìê‡•ª‚¯
