@@ -47,6 +47,7 @@ public:
 
 	//プレイヤーのHP
 	int        m_PlayerHP = 100;
+	bool		m_Atacking;		//攻撃中
 
 private:
 	//操作処理
@@ -57,6 +58,7 @@ private:
 	CImage* m_pImg_Right;
 	CImage* m_pImg_Left;
 	CImage* m_pImg_Atk;
+	
 	
 
 private:
@@ -70,7 +72,7 @@ private:
 
 	int			m_Action;		//動作状態
 
-	bool		m_Atacking;		//攻撃中
+	
 
 	//ジャンプ処理
 	bool		m_Jumping;	//ジャンプ中

@@ -141,8 +141,8 @@ void CPlayer::KeyInput()
 		m_pImg = m_pImg_Atk;
 
 		/*if (m_Atacking == false)
-		{
-			m_Atacking = true;*/
+		{*/
+			m_Atacking = true;
 			m_Action = enAction::Attack ;
 		//}
 	}

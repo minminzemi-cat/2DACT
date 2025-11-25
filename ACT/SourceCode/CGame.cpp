@@ -309,17 +309,17 @@ void CGame::Update()
 
 				//*****************************************************************
 				//プレイヤーがアタック状態のときの当たり判定
-				if (m_pPlayer->Attack) {
-					if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE,
+				if (m_pPlayer->m_Atacking == true) {
+					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE,
 						m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE))
 					{
-						m_pBoss->BossHP - 10000000;
+						m_pBoss->BossHP = m_pBoss->BossHP - 100;
 					}
 				}
 				
 				//ボスが攻撃中のプレイヤーとの当たり判定
 				if (m_pBoss->Attack) {
-					if (CircleCollisionDetection(m_Player.x, m_Player.y, C_SIZE / 2,
+					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE / 2,
 						m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE / 2))
 					{
 						//ここにプレイヤーのHPゲージが減る処理を書く
@@ -375,6 +375,12 @@ void CGame::Draw()
 
 		//エネミー描画
 		m_pEnemy->Draw( m_pCamera);
+
+		//ボスのHPが0のとき爆発
+		if (m_pBoss->BossHP == 0)
+		{
+			m_pBoss->ExplosionAnimation();
+		}
 
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++
