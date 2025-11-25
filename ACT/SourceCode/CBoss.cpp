@@ -162,6 +162,8 @@ void CBoss::Animation()
 
 void  CBoss::ExplosionAnimation()
 {
+	//画像のサイズを間違えると描画されない
+	//ディエゴのおかげ
 	m_FrameSplit.w = 192;
 	m_FrameSplit.h = 192;
 	m_FrameSplit.y = 0;
