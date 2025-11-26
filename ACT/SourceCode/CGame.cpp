@@ -315,12 +315,15 @@ void CGame::Update()
 					{
 						m_pBoss->BossHP = m_pBoss->BossHP - 100;
 					}
+
+
+					if (m_pBoss->BossHP == 0)
+					{
+						m_Scene = enScene::Kuria;
+					}
 				}
 
-				if (m_pBoss->BossHP == 0)
-				{
-					m_Scene = enScene::Kuria;
-				}
+				
 				
 				//ボスが攻撃中のプレイヤーとの当たり判定
 				//m_pBoss->m_Boss.x + C_SIZE/2　の　C_SIZE/2を加えることでボスが攻撃して剣の頂点にしか当たり判定がなかった奴が
@@ -335,14 +338,16 @@ void CGame::Update()
 						
 						m_pPlayer->m_PlayerHP =m_pPlayer->m_PlayerHP- 1;
 					}
+
+
+					if (m_pPlayer->m_PlayerHP == 0)
+					{
+						m_Scene = enScene::GameOver;
+					}
 				}
 
 				//*****************************************************************
 
-				if (m_pPlayer->m_PlayerHP == 0)
-				{
-					m_Scene = enScene::GameOver;
-				}
 				
 		break;
 		case enScene::GameOver://ゲームオーバー
