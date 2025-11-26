@@ -40,7 +40,7 @@ public:
 		Title,		//タイトル.
 		GameMain,	//ゲーム中.
 		GameOver,	//ゲームオーバー.
-		Ending,		//エンディング.
+		Kuria,		//クリア.
 	};
 
 	//---------------------------------------
@@ -103,7 +103,7 @@ private:
 	//タイトル画面とエンディング画面の画像を入れる
 	CImage*		m_pTitleImg;
 	CImage*		m_pGameOverImg;
-	CImage*		m_pEndingImg;
+	CImage*		m_pKuriaImg;
 
 	//シーン
 	enScene		m_Scene;
@@ -128,7 +128,7 @@ private:
 	CStage* m_pGameOver;
 
 	//----エンディング
-	CStage* m_pEnding;
+	CStage* m_pKuriaing;
 
 	//-----カメラ------
 	CCamera* m_pCamera;

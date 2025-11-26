@@ -34,7 +34,7 @@ CGame::CGame(GameWindow* pGameWnd)
 	, m_Scene(enScene::Title)
 	, m_pTitleImg	( nullptr )
 	, m_pGameOverImg(nullptr)
-	, m_pEndingImg	( nullptr )
+	, m_pKuriaImg	( nullptr )
 	, m_pCamera		( nullptr )
 {
 }
@@ -120,7 +120,7 @@ bool CGame::Create()
 	//ゲームオーバー画像のインスタンス生成
 	m_pGameOverImg =	new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//タイトル画像のインスタンス生成
-	m_pEndingImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	m_pKuriaImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
 	//エンディング画像のインスタンス生成
 	m_pStageImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
@@ -161,7 +161,7 @@ bool CGame::Create()
 	if (m_pGameOverImg->LoadBmp("Data\\Image\\GameOver.bmp") == false) return false;
 
 	//エンディングの読み込み.
-	if (m_pEndingImg->LoadBmp("Data\\Image\\gamekuria.bmp") == false) return false;
+	if (m_pKuriaImg->LoadBmp("Data\\Image\\gamekuria.bmp") == false) return false;
 
 	//プレイヤーのインスタンス生成
 	m_pPlayer = new CPlayer();
@@ -198,9 +198,9 @@ bool CGame::Create()
 	
 	
 	//エンディングのインスタンス生成
-	m_pEnding = new CStage();
+	m_pKuriaing = new CStage();
 	//画像の設定
-	m_pEnding->SetImage(m_pEndingImg);
+	m_pKuriaing->SetImage(m_pKuriaImg);
 
 	
 
@@ -232,7 +232,7 @@ void CGame::Destroy()
 
 
 	//BITMAPの解放.
-	SAFE_DELETE(m_pEndingImg);
+	SAFE_DELETE(m_pKuriaImg);
 	SAFE_DELETE(m_pGameOverImg);
 	SAFE_DELETE(m_pTitleImg);
 	SAFE_DELETE(m_pStageImg);
@@ -316,15 +316,24 @@ void CGame::Update()
 						m_pBoss->BossHP = m_pBoss->BossHP - 100;
 					}
 				}
+
+				if (m_pBoss->BossHP == 0)
+				{
+					m_Scene = enScene::Kuria;
+				}
 				
 				//ボスが攻撃中のプレイヤーとの当たり判定
+				//m_pBoss->m_Boss.x + C_SIZE/2　の　C_SIZE/2を加えることでボスが攻撃して剣の頂点にしか当たり判定がなかった奴が
+				//ボス自身に当たり判定をつけることができるようになった
 				if (m_pBoss->Attack) {
-					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE / 2,
-						m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE / 2))
+					if (CircleCollisionDetection(m_pBoss->m_Boss.x + C_SIZE/2, m_pBoss->m_Boss.y + C_SIZE / 2, C_SIZE/2 ,
+						m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE /2
+						 ))
 					{
 						//ここにプレイヤーのHPゲージが減る処理を書く
 						
-						m_pPlayer->m_PlayerHP - 10;
+						
+						m_pPlayer->m_PlayerHP =m_pPlayer->m_PlayerHP- 1;
 					}
 				}
 
@@ -347,7 +356,7 @@ void CGame::Update()
 				//ゲームオーバー動作
 				m_pGameOver->Update();
 
-				m_Scene = enScene::GameMain;
+				m_Scene = enScene::Title;
 			}
 			break;
 	}
@@ -386,69 +395,79 @@ void CGame::Draw()
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		//		プレイヤーのHPゲージ
 
-		if (m_pPlayer->m_PlayerHP == 100)
-		{
+		/*if (m_pPlayer->m_PlayerHP == 100)
+		{*/
 			//画像の表示させたい場所と画像の座標を求める
 			m_pHPgeziImg->TransBlt(
 				10,					//表示位置x座標
 				10,					//表示位置y座標.
 				143,				//画像幅
 				50,					//画像高さ.
-				0,					//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ
+				//ディエゴのおかげ
+				715-(m_pPlayer->m_PlayerHP / 20) * 143,					//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ
 				0);					//元画像y座標.
 			//意味合い
 			//143,50はHP画像の幅と高さでo,oは開始位置　
 			//開始位置０，０から幅143、高さ50の画像を取り出しますよ
-			
-		}
-		else if (m_pPlayer->m_PlayerHP == 70)
-		{
-			//画像の表示させたい場所と画像の座標を求める
-			m_pHPgeziImg->TransBlt(
-				10,					//表示位置x座標
-				10,					//表示位置y座標.
-				143,				//画像幅
-				50,					//画像高さ.
-				//取り出し開始位置
-				143,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ
-				0);					//元画像y座標.
-		}
 
-		else if (m_pPlayer->m_PlayerHP == 50)
-		{
-			//画像の表示させたい場所と画像の座標を求める
-			m_pHPgeziImg->TransBlt(
-				10,					//表示位置x座標
-				10,					//表示位置y座標.
-				143,				//画像幅
-				50,					//画像高さ.
-				//取り出し開始位置
-				143*2,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ 286
-				0);					//元画像y座標.
-		}
-		else if (m_pPlayer->m_PlayerHP == 30)
-		{
-			//画像の表示させたい場所と画像の座標を求める
-			m_pHPgeziImg->TransBlt(
-				10,					//表示位置x座標
-				10,					//表示位置y座標.
-				143,				//画像幅
-				50,					//画像高さ.
-				//取り出し開始位置
-				143*3,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ  429,
-				0);					//元画像y座標.
-		}
-		else {
-			//画像の表示させたい場所と画像の座標を求める
-			m_pHPgeziImg->TransBlt(
-				10,					//表示位置x座標
-				10,					//表示位置y座標.
-				143,				//画像幅
-				50,					//画像高さ.
-				//取り出し開始位置
-				143*4,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ
-				0);					//元画像y座標.
-		}
+
+
+			//僕の勘違い
+			//		m_pPlayer->m_PlayerHP == 75にすると
+			//		74とかになると100になったり0になったりするようになっていた
+			
+
+
+
+		//}
+		//else if (m_pPlayer->m_PlayerHP >= 75)
+		//{
+		//	//画像の表示させたい場所と画像の座標を求める
+		//	m_pHPgeziImg->TransBlt(
+		//		10,					//表示位置x座標
+		//		10,					//表示位置y座標.
+		//		143,				//画像幅
+		//		50,					//画像高さ.
+		//		//取り出し開始位置
+		//		143,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ
+		//		0);					//元画像y座標.
+		//}
+
+		//else if (m_pPlayer->m_PlayerHP >= 50)
+		//{
+		//	//画像の表示させたい場所と画像の座標を求める
+		//	m_pHPgeziImg->TransBlt(
+		//		10,					//表示位置x座標
+		//		10,					//表示位置y座標.
+		//		143,				//画像幅
+		//		50,					//画像高さ.
+		//		//取り出し開始位置
+		//		143*2,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ 286
+		//		0);					//元画像y座標.
+		//}
+		//else if (m_pPlayer->m_PlayerHP >= 30)
+		//{
+		//	//画像の表示させたい場所と画像の座標を求める
+		//	m_pHPgeziImg->TransBlt(
+		//		10,					//表示位置x座標
+		//		10,					//表示位置y座標.
+		//		143,				//画像幅
+		//		50,					//画像高さ.
+		//		//取り出し開始位置
+		//		143*3,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ  429,
+		//		0);					//元画像y座標.
+		//}
+		//else {
+		//	//画像の表示させたい場所と画像の座標を求める
+		//	m_pHPgeziImg->TransBlt(
+		//		10,					//表示位置x座標
+		//		10,					//表示位置y座標.
+		//		143,				//画像幅
+		//		50,					//画像高さ.
+		//		//取り出し開始位置
+		//		143*4,				//元画像x座標.・・・座標0,0から画像幅、高さ分を取り出しますよ
+		//		0);					//元画像y座標.
+		//}
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -457,11 +476,11 @@ void CGame::Draw()
 		//ゲームオーバー描画
 		m_pGameOver->Draw(m_pCamera);
 		break;
-	case enScene::Ending://エンディング
+	case enScene::Kuria://エンディング
 
 		//エンディング描画
 			
-		m_pEnding->Draw(m_pCamera);
+		m_pKuriaing->Draw(m_pCamera);
 
 		break;
 	}
