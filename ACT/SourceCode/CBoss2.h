@@ -1,6 +1,7 @@
 #pragma once
 #include"CCharacter.h"		//キャラクタークラス
 
+
 /**********************************
 * 		ボスクラス
 *	***/
@@ -10,29 +11,28 @@ class CBoss2
 {
 public:
 	//動作処理列挙型
-	enum enBoss2Action
+	enum enBossAction
 	{
 		Wait = 0,	//待機
 
 		Attack,     //攻撃
 
-		Dei,		//死亡
+		dei,		//死亡
+
+		Explosion,
 
 		None = -1,	//未設定
 	};
 public:
-
-	CBoss2();
-	~CBoss2();
-
-public:
-
+	CBoss2();//コンストラクタ
+	~CBoss2() override;//デストラクタ
 
 	//キャラクター構造体
 	struct CHARA
 	{
 		int x;
 		int y;
+		int state;
 	};
 
 	//動作関数
@@ -40,11 +40,39 @@ public:
 	//		仮想関数でない場合はエラーになる
 //描画関数
 	void Draw(CCamera* pCamera) override;
+
+	void TwoSetImage(CImage* pImg, CImage* pImg2)
+	{
+		m_pImg = pImg;
+		m_pBoss2Img = pImg;
+		m_pExplosion01_Img = pImg2;
+	}
+
 	//アニメーション処理
 	void Animation();
 
-	CHARA		m_Boss2;
+	//爆発アニメーション
+	void ExplosionAnimation();
 
-	bool		m_Atacking;		//攻撃中
+	CHARA m_Boss2;
+
+	DWORD nowTime = 0;		//現在の時間.
+
+	int   Boss2HP = 1000;	//ボスのHP	
+
+	bool	m_Atacking;		//攻撃中
+
+private:
+	int			m_GroundPos;	//地面の位置（定数でも可）
+
+	CImage* m_pBossImg;
+	CImage* m_pExplosion01_Img;
+
+	//攻撃の処理
+	bool	m_Atak1;
+	bool	m_Atak2;
+
+	int  	m_Action;
+
 
 };

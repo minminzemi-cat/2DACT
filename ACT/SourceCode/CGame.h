@@ -8,7 +8,7 @@
 #include"CStage.h"		//ステージクラス
 #include "CCamera.h"	//カメラクラス
 #include"CBoss.h"		//ボスクラス
-
+#include"CBoss2.h"		//ボス2クラス
 
 
 /**************************************************
@@ -90,6 +90,7 @@ private:
 	CImage*		m_pCharaImg;		//キャラクター画像.
 	CImage*		m_pEnemyImg;		//敵画像.
 	CImage*     m_pBossImg;     //ボス画像.
+	CImage*		m_pBoss2Img;		//ボス２画像
 	CImage*		m_pExplosion01_Img;  //爆発アニメーション画像01
 
 	CImage*		m_pPlayer_right_Img;	//プレイヤー(右向き)画像
@@ -116,20 +117,14 @@ private:
 
 	//----ぼす----
 	CBoss* m_pBoss;
+	CBoss2* m_pBoss2;
 	CBoss* m_BossHP;
+	CBoss2* m_Boss2HP;
 
 	//-----ステージ-----.
 	CStage* m_pStage;			//ステージ
 
-	//----タイトル-----
-	CStage* m_pTitle;
-
-	//----ゲームオーバー
-	CStage* m_pGameOver;
-
-	//----エンディング
-	CStage* m_pKuriaing;
-
+	
 	//-----カメラ------
 	CCamera* m_pCamera;
 

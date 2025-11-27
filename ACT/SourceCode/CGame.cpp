@@ -29,6 +29,7 @@ CGame::CGame(GameWindow* pGameWnd)
 	, m_pPlayer(nullptr)
 	, m_pEnemy(nullptr)
 	, m_pBoss(nullptr)
+	, m_pBoss2(nullptr)
 	, m_pHPgeziImg(nullptr)
 	, m_pStage		( nullptr )
 	, m_Scene(enScene::Title)
@@ -102,6 +103,9 @@ bool CGame::Create()
 	//ボス画像のインスタンス生成
 	m_pBossImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
+	//ボス2画像のインスタンス生成
+	m_pBoss2Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+
 	//爆発画像のインスタンス生成
 	m_pExplosion01_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
@@ -115,14 +119,14 @@ bool CGame::Create()
 	//HPゲージの画像のインスタンス生成
 	m_pHPgeziImg	=		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
-	//ステージ画像のインスタンス生成
+	//タイトル画像のインスタンス生成
 	m_pTitleImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	//ゲームオーバー画像のインスタンス生成
 	m_pGameOverImg =	new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
-	//タイトル画像のインスタンス生成
+	//ゲームクリア画像のインスタンス生成
 	m_pKuriaImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
-	//エンディング画像のインスタンス生成
+	//ステージ画像のインスタンス生成
 	m_pStageImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 	
 
@@ -136,6 +140,9 @@ bool CGame::Create()
 	
 	//ボスの読み込み.
 	if (m_pBossImg->LoadBmp("Data\\Image\\Boss.bmp") == false) return false;
+
+	//ボス2の読み込み.
+	if (m_pBoss2Img->LoadBmp("Data\\Image\\Boss2.bmp") == false) return false;
 
 	//爆発の読み込み
 	if (m_pExplosion01_Img->LoadBmp("Data\\Image\\Explosion.bmp") == false) return false;
@@ -155,7 +162,7 @@ bool CGame::Create()
 
 
 	//タイトルの読み込み.
-	if (m_pTitleImg->LoadBmp("Data\\Image\\Title.bmp") == false) return false;
+	if (m_pTitleImg->LoadBmp("Data\\Image\\title2.bmp") == false) return false;
 
 	//ゲームオーバーの読み込み.
 	if (m_pGameOverImg->LoadBmp("Data\\Image\\GameOver.bmp") == false) return false;
@@ -179,28 +186,16 @@ bool CGame::Create()
 	//画像の設定
 	m_pBoss->TwoSetImage(m_pBossImg, m_pExplosion01_Img);
 	
-
+	//ボスのインスタンス生成
+	m_pBoss2 = new CBoss2();
+	//画像の設定
+	m_pBoss2->TwoSetImage(m_pBoss2Img, m_pExplosion01_Img);
 
 	//ステージのインスタンス生成
 	m_pStage = new CStage();
 	//画像の設定
 	m_pStage->SetImage(m_pStageImg);
 
-	//タイトルのインスタンス生成
-	m_pTitle = new CStage();
-	//画像の設定
-	m_pTitle->SetImage(m_pTitleImg);
-
-	//ゲームオーバーのインスタンス生成
-	m_pGameOver = new CStage();
-	//画像の設定
-	m_pGameOver->SetImage(m_pGameOverImg);
-	
-	
-	//エンディングのインスタンス生成
-	m_pKuriaing = new CStage();
-	//画像の設定
-	m_pKuriaing->SetImage(m_pKuriaImg);
 
 	
 
@@ -276,8 +271,7 @@ void CGame::Update()
 				}
 				m_Scene = enScene::GameMain;
 
-				//タイトル動作
-				m_pTitle->Update();
+			
 			}
 			break;
 
@@ -319,7 +313,7 @@ void CGame::Update()
 
 					if (m_pBoss->BossHP == 0)
 					{
-						m_Scene = enScene::Kuria;
+ 						m_Scene = enScene::Kuria;
 					}
 				}
 
@@ -358,8 +352,7 @@ void CGame::Update()
 			}
 			if (GetAsyncKeyState(VK_RETURN) & 0x0001)
 			{
-				//ゲームオーバー動作
-				m_pGameOver->Update();
+				
 
 				m_Scene = enScene::Title;
 			}
@@ -373,7 +366,17 @@ void CGame::Draw()
 	switch(m_Scene){
 	case enScene::Title://タイトル
 		//タイトル描画
-		m_pTitle->Draw(m_pCamera);
+		/*m_pTitle->Draw(m_pCamera);*/
+
+		m_pTitleImg->BBlt(
+			0,					//描画させたいｘ座標
+			0,					//描画させたいｙ座標
+			WND_W,				//描画するサイズｘ（横）
+			WND_H,				//描画するサイズｙ　縦
+			0,				//元画像のｘ
+			0					//元画像のｙ
+		);
+
 		break;
 	case enScene::GameMain://ゲーム中
 
@@ -479,13 +482,28 @@ void CGame::Draw()
 		break;
 	case enScene::GameOver://ゲームオーバー
 		//ゲームオーバー描画
-		m_pGameOver->Draw(m_pCamera);
+		m_pGameOverImg->BBlt(
+			0,
+			0,
+			WND_W,
+			WND_H,
+			0,
+			0
+		);
+		
 		break;
 	case enScene::Kuria://エンディング
 
 		//エンディング描画
-			
-		m_pKuriaing->Draw(m_pCamera);
+		m_pKuriaImg->BBlt(
+			0,
+			0,
+			WND_W,
+			WND_H,
+			0,
+			0
+		);
+		
 
 		break;
 	}
