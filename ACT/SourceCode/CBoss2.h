@@ -11,7 +11,7 @@ class CBoss2
 {
 public:
 	//動作処理列挙型
-	enum enBossAction
+	enum enBoss2Action
 	{
 		Wait = 0,	//待機
 
@@ -41,7 +41,7 @@ public:
 //描画関数
 	void Draw(CCamera* pCamera) override;
 
-	void TwoSetImage(CImage* pImg, CImage* pImg2)
+	void Two2SetImage(CImage* pImg, CImage* pImg2)
 	{
 		m_pImg = pImg;
 		m_pBoss2Img = pImg;
@@ -65,7 +65,7 @@ public:
 private:
 	int			m_GroundPos;	//地面の位置（定数でも可）
 
-	CImage* m_pBossImg;
+	CImage* m_pBoss2Img;
 	CImage* m_pExplosion01_Img;
 
 	//攻撃の処理

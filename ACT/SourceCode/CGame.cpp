@@ -189,7 +189,7 @@ bool CGame::Create()
 	//ボスのインスタンス生成
 	m_pBoss2 = new CBoss2();
 	//画像の設定
-	m_pBoss2->TwoSetImage(m_pBoss2Img, m_pExplosion01_Img);
+	m_pBoss2->Two2SetImage(m_pBoss2Img, m_pExplosion01_Img);
 
 	//ステージのインスタンス生成
 	m_pStage = new CStage();
@@ -223,6 +223,8 @@ void CGame::Destroy()
 
 	SAFE_DELETE(m_pBoss);
 
+	SAFE_DELETE(m_pBoss2);
+
 	SAFE_DELETE(m_pPlayer);
 
 
@@ -236,6 +238,7 @@ void CGame::Destroy()
 	SAFE_DELETE(m_pPlayer_left_Img);
 	SAFE_DELETE(m_pPlayer_atk_Img);
 	SAFE_DELETE(m_pExplosion01_Img);
+	SAFE_DELETE(m_pBoss2Img);
 	SAFE_DELETE(m_pBossImg);
 	SAFE_DELETE(m_pEnemyImg);
 	SAFE_DELETE(m_pCharaImg);
@@ -284,6 +287,9 @@ void CGame::Update()
 
 				//エネミー動作
 				m_pEnemy->Update();
+
+				//ボス２動作
+				m_pBoss2->Update();
 
 				//ボス動作
 				m_pBoss->Update();
@@ -389,6 +395,8 @@ void CGame::Draw()
 
 		//ボスを描画
 		m_pBoss->Draw(m_pCamera);
+
+		m_pBoss2->Draw(m_pCamera);
 
 		//エネミー描画
 		m_pEnemy->Draw( m_pCamera);
