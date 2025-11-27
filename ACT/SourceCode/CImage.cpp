@@ -57,7 +57,7 @@ bool CImage::BBlt(int xDest, int yDest, int wDest,
 	{
 		return false;
 	}
-	return false;
+	return true;
 }
 
 //‰æ‘œ‚ð“§‰ß‚µ‚Ä•\Ž¦.
