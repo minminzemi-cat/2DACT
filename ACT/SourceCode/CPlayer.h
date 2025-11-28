@@ -50,6 +50,8 @@ public:
 	bool		m_Atacking;		//攻撃中
 
 private:
+	//初期化(リセット)関数.
+	void InitializeGame();
 	//操作処理
 	void KeyInput();
 	//アニメーション処理

@@ -68,7 +68,14 @@ void CGame::InitializeGame()
 	m_pBoss->BossHP = 100;
 	m_pBoss2->Boss2HP = 1000;
 
+	//爆発の初期化、HPゲージの初期化、
 
+	m_pPlayer->m_PlayerHP = 100;
+
+	m_pBoss->InitializeGame();
+	
+
+	//m_pBoss2->InitializeGame();
 }
 
 //構築関数.
@@ -429,6 +436,7 @@ void CGame::Update()
 			}
 			break;
 	}
+	
 }
 
 //描画関数(画像の表示処理を行う).
@@ -616,6 +624,7 @@ void CGame::Draw()
 			blendfunc);
 			*/
 }
+
 
 
 

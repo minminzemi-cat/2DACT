@@ -22,12 +22,19 @@ CPlayer::CPlayer()//コンストラクタ
 
 	m_LookingRight = true;
 
-	m_PlayerHP = 100;
+	
 }
 
 CPlayer::~CPlayer()//デストラクタ
 {
 }
+
+//初期化(リセット)関数.
+void CPlayer::InitializeGame()
+{
+	m_PlayerHP = 100;
+}
+
 
 //動作関数
 void CPlayer::Update()

@@ -20,7 +20,14 @@ CBoss2::CBoss2()
 CBoss2::~CBoss2()
 {
 }
+//初期化(リセット)関数.
+void InitializeGame()
+{
+	int   Boss2HP = 1000;	//ボスのHP
+}
 
+
+//更新関数
 void CBoss2::Update()
 {
 	//毎フレーム左方向に動き続ける

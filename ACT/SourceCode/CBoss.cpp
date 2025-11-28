@@ -19,6 +19,14 @@ CBoss::~CBoss()
 {
 }
 
+//初期化関数
+void CBoss::InitializeGame()
+{
+	int   BossHP = 1000;	//ボスのHP
+
+}
+
+//更新関数
 void CBoss::Update()
 {
 	//毎フレーム左方向に動き続ける
