@@ -37,6 +37,8 @@ CGame::CGame(GameWindow* pGameWnd)
 	, m_pGameOverImg(nullptr)
 	, m_pKuriaImg	( nullptr )
 	, m_pCamera		( nullptr )
+	, m_Muteki_Flag(false)
+	, m_TimeConter(0.0f)
 {
 }
 
@@ -329,28 +331,49 @@ void CGame::Update()
 				//m_pBoss->m_Boss.x + C_SIZE/2　の　C_SIZE/2を加えることでボスが攻撃して剣の頂点にしか当たり判定がなかった奴が
 				//ボス自身に当たり判定をつけることができるようになった
 				if (m_pBoss->Attack) {
-					if (CircleCollisionDetection(m_pBoss->m_Boss.x + C_SIZE/2, m_pBoss->m_Boss.y + C_SIZE / 2, C_SIZE/2 ,
+					if (CircleCollisionDetection(m_pBoss->m_Boss.x + C_SIZE / 2, m_pBoss->m_Boss.y + C_SIZE / 2, C_SIZE/2 ,
 						m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE /2
 						 ))
 					{
+						m_Muteki_Flag = true;
+						if (m_TimeConter > 1500)
+						{
+							m_Muteki_Flag = false;
+							m_TimeConter = 0;
+						}
 						//ここにプレイヤーのHPゲージが減る処理を書く
-						
-						
 						m_pPlayer->m_PlayerHP =m_pPlayer->m_PlayerHP- 1;
 					}
 
+				}
 
-					if (m_pPlayer->m_PlayerHP == 0)
+				if (m_pBoss2->Attack) {
+					if (CircleCollisionDetection(m_pBoss2->m_Boss2.x + C_SIZE / 2, m_pBoss2->m_Boss2.y + C_SIZE / 2, C_SIZE / 2,
+						m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE / 2
+					))
 					{
-						m_Scene = enScene::GameOver;
+						m_Muteki_Flag = true;
+						if (m_TimeConter > 1500)
+						{
+							m_Muteki_Flag = false;
+							m_TimeConter = 0;
+						}
+						//ここにプレイヤーのHPゲージが減る処理を書く
+						m_pPlayer->m_PlayerHP = m_pPlayer->m_PlayerHP - 1;
 					}
+				}
+
+
+				if (m_pPlayer->m_PlayerHP == 0)
+				{
+					m_Scene = enScene::GameOver;
 				}
 
 				//*****************************************************************
 				
 				
 				
-				//自機が画面外にでないようにする
+				//自機が画面外にでないようにする  なんかできなかった
 				if (m_Player.x < 0) {
 					m_Player.x = 0;		//左側でない
 				}
@@ -368,7 +391,7 @@ void CGame::Update()
 			if (GetAsyncKeyState(VK_RETURN) & 0x0001)
 			{
 				
-
+				//タイトルへ
 				m_Scene = enScene::Title;
 			}
 			break;
@@ -381,14 +404,12 @@ void CGame::Draw()
 	switch(m_Scene){
 	case enScene::Title://タイトル
 		//タイトル描画
-		/*m_pTitle->Draw(m_pCamera);*/
-
 		m_pTitleImg->BBlt(
 			0,					//描画させたいｘ座標
 			0,					//描画させたいｙ座標
 			WND_W,				//描画するサイズｘ（横）
 			WND_H,				//描画するサイズｙ　縦
-			0,				//元画像のｘ
+			0,					//元画像のｘ
 			0					//元画像のｙ
 		);
 

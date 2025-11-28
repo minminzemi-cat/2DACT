@@ -119,8 +119,9 @@ private:
 
 	//----ぼす----
 	CBoss* m_pBoss;
-	CBoss2* m_pBoss2;
 	CBoss* m_BossHP;
+
+	CBoss2* m_pBoss2;
 	CBoss2* m_Boss2HP;
 
 	//-----ステージ-----.
@@ -129,6 +130,12 @@ private:
 	
 	//-----カメラ------
 	CCamera* m_pCamera;
+
+
+	//無敵
+	bool		   m_Muteki_Flag;
+
+	float			m_TimeConter;
 
 };
 
