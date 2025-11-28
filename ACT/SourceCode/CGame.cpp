@@ -132,7 +132,7 @@ bool CGame::Create()
 	m_pPlayer_atk_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
 	//HPゲージの画像のインスタンス生成
-	m_pHPgeziImg	=		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	m_pHPgeziImg	=	new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
 	//タイトル画像のインスタンス生成
 	m_pTitleImg =		new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
