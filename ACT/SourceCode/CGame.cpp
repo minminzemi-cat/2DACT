@@ -434,6 +434,12 @@ void CGame::Update()
 				//タイトルへ
 				m_Scene = enScene::Title;
 			}
+
+			//だいごくんから教えてもらった
+			//ここに初期化する関数と構築する関数を呼び出すことで
+			//初期化する処理を考える必要がなく、呼び出すことでまたゲームが一から始まる
+			InitializeGame();
+			Create();
 			break;
 	}
 	
