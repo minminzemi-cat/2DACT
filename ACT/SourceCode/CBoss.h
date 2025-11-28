@@ -68,11 +68,10 @@ private:
 	CImage* m_pBossImg;
 	CImage* m_pExplosion01_Img;
 
-	//UŒ‚‚Ìˆ—
-	bool	m_Atak1;
-	bool	m_Atak2;
 
 	int  	m_Action;
+
+	bool   m_Explosion_Flag;
 
 
 };

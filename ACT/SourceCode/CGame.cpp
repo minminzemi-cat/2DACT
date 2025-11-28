@@ -57,15 +57,17 @@ void CGame::InitializeGame()
 	m_Player.ExpAnimCnt = 0;
 
 	//ボスの初期配置.
-	m_pBoss->m_Boss.x = (WND_W / 2) - (C_SIZE / 2);
-	m_pBoss->m_Boss.y = WND_H - (C_SIZE + 16);	//補正:画面下からキャラ1体分+16上の位置.
+	
 	m_pBoss->m_Boss.state = enCharaState::Living;	//生存中.
-	m_pBoss->enBossAction
+	m_pBoss->m_Boss.state = m_pBoss->enBossAction::Wait;
 	
 
-	m_pBoss2->m_Boss2.x = (WND_W / 2) - (C_SIZE / 2);
-	m_pBoss2->m_Boss2.y = WND_H - (C_SIZE + 16);	//補正:画面下からキャラ1体分+16上の位置.
 	m_pBoss2->m_Boss2.state = enCharaState::Living;	//生存中.
+	m_pBoss2->m_Boss2.state = m_pBoss2->enBoss2Action::Wait;
+
+	m_pBoss->BossHP = 100;
+	m_pBoss2->Boss2HP = 1000;
+
 
 }
 
@@ -325,10 +327,10 @@ void CGame::Update()
 					}
 
 
-					/*if (m_pBoss->BossHP == 0)
+					if (m_pBoss->BossHP == 0)
 					{
- 						m_Scene = enScene::Kuria;
-					}*/
+						m_pBoss->m_Boss.state = CBoss::dei;
+					}
 				}
 
 				//---------------ボス２----------------
@@ -340,6 +342,7 @@ void CGame::Update()
 
 						if (m_pBoss2->Boss2HP == 0)
 						{
+							m_pBoss2->m_Boss2.state = CBoss2::dei;
 							m_Scene = enScene::Kuria;
 						}
 					}

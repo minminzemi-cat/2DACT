@@ -7,8 +7,6 @@
 CBoss2::CBoss2()
 	: CCharacter()
 	, m_GroundPos()
-	, m_Atak1()
-	, m_Atak2()
 	, m_Boss2({ 576,320 })
 	, m_Action(enBoss2Action::Wait)
 	, m_Atacking(false)

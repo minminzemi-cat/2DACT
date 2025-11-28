@@ -68,9 +68,7 @@ private:
 	CImage* m_pBoss2Img;
 	CImage* m_pExplosion01_Img;
 
-	//UŒ‚‚Ìˆ—
-	bool	m_Atak1;
-	bool	m_Atak2;
+
 
 	int  	m_Action;
 

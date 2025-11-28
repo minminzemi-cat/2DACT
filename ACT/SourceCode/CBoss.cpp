@@ -6,13 +6,12 @@
 
 CBoss::CBoss()
 	:m_GroundPos()
-	, m_Atak1()
-	, m_Atak2()
 	, m_Boss({500,340})
 	, m_Action(enBossAction::Wait)
 	,m_Atacking(false)
 	,m_pBossImg(m_pImg)
 	,m_pExplosion01_Img(m_pImg2)
+	,m_Explosion_Flag(false)
 {
 }
 
@@ -155,16 +154,20 @@ void CBoss::Animation()
 
 void  CBoss::ExplosionAnimation()
 {
+
 	//画像のサイズを間違えると描画されない
 	//ディエゴのおかげ
 	m_FrameSplit.w = 192;
 	m_FrameSplit.h = 192;
 	m_FrameSplit.y = 0;
 	//僕の画像はこの大きさでないとだめ
+
+	
 	if (m_FrameCounter >= 11) {
 		m_FrameSplit.x += m_FrameSplit.w;
 	
 		m_FrameCounter = 1;
+		
 	}
 	
 }
