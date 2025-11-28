@@ -107,7 +107,7 @@ void CBoss2::Draw(CCamera* pCamera)
 
 	m_pImg->TransBlt(
 		DispPos2.x+100,		//表示位置x座標
-		150,		//表示位置y座標.
+		150,				//表示位置y座標.
 		m_FrameSplit.w,		//画像幅
 		m_FrameSplit.h,		//画像高さ.
 		m_FrameSplit.x,		//元画像x座標.

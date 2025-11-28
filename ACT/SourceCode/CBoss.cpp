@@ -141,15 +141,8 @@ void CBoss::Animation()
 
 		break;
 	case enBossAction::dei:
-		/*
-		m_FrameSplit.y = 800-160;
-		if (m_FrameCounter >= 22) {
-			m_FrameSplit.x -= m_FrameSplit.w;
-			m_FrameSplit.y += m_FrameSplit.h;
-			m_FrameCounter = 0;
-		}
-		*/
-;
+	
+		
 		
 
 		break;

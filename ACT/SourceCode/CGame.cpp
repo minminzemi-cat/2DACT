@@ -60,8 +60,12 @@ void CGame::InitializeGame()
 	m_pBoss->m_Boss.x = (WND_W / 2) - (C_SIZE / 2);
 	m_pBoss->m_Boss.y = WND_H - (C_SIZE + 16);	//補正:画面下からキャラ1体分+16上の位置.
 	m_pBoss->m_Boss.state = enCharaState::Living;	//生存中.
-	//m_Boss.ExpAnimCnt = 0;
+	m_pBoss->enBossAction
+	
 
+	m_pBoss2->m_Boss2.x = (WND_W / 2) - (C_SIZE / 2);
+	m_pBoss2->m_Boss2.y = WND_H - (C_SIZE + 16);	//補正:画面下からキャラ1体分+16上の位置.
+	m_pBoss2->m_Boss2.state = enCharaState::Living;	//生存中.
 
 }
 
@@ -258,6 +262,7 @@ void CGame::Destroy()
 	DeleteDC( m_hMemDC );
 }
 
+
 //更新関数(キー入力や動作処理を行う).
 void CGame::Update()
 {	
@@ -311,6 +316,7 @@ void CGame::Update()
 
 				//*****************************************************************
 				//プレイヤーがアタック状態のときの当たり判定
+				//-------------ボス------------
 				if (m_pPlayer->m_Atacking == true) {
 					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE,
 						m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE))
@@ -319,10 +325,25 @@ void CGame::Update()
 					}
 
 
-					if (m_pBoss->BossHP == 0)
+					/*if (m_pBoss->BossHP == 0)
 					{
  						m_Scene = enScene::Kuria;
+					}*/
+				}
+
+				//---------------ボス２----------------
+				if (m_pPlayer->m_Atacking == true) {
+					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE,
+						m_pBoss2->m_Boss2.x, m_pBoss2->m_Boss2.y, C_SIZE))
+					{
+						m_pBoss2->Boss2HP = m_pBoss2->Boss2HP - 100;
+
+						if (m_pBoss2->Boss2HP == 0)
+						{
+							m_Scene = enScene::Kuria;
+						}
 					}
+
 				}
 
 				
@@ -382,6 +403,15 @@ void CGame::Update()
 				}
 				
 		break;
+		case enScene::Kuria:
+			if (GetAsyncKeyState(VK_RETURN) & 0x0001)
+			{
+
+				//タイトルへ
+				m_Scene = enScene::Title;
+			}
+
+			break;
 		case enScene::GameOver://ゲームオーバー
 			//F1キー.
 			if (GetAsyncKeyState(VK_F1) & 0x0001) {
@@ -426,8 +456,12 @@ void CGame::Draw()
 		//ボスを描画
 		m_pBoss->Draw(m_pCamera);
 
-		m_pBoss2->Draw(m_pCamera);
-
+		//ボスのHPが少なくなってきたら
+		if (m_pBoss->BossHP <= 10)
+		{
+			//ボス２を描画
+			m_pBoss2->Draw(m_pCamera);
+		}
 		//エネミー描画
 		m_pEnemy->Draw( m_pCamera);
 
