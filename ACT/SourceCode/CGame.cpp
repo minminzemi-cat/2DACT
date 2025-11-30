@@ -276,7 +276,7 @@ void CGame::Destroy()
 void CGame::Update()
 {	
 		//BGM_Bonusをループ再生
-	CSoundManager::PlayLoop(CSoundManager::BGM_Bonus);
+	CSoundManager::PlayLoop(CSoundManager::BGM_Title);
 
 	//シーンごとの処理
 	switch (m_Scene) {
