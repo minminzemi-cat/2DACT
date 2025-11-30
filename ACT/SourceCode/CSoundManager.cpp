@@ -61,7 +61,7 @@ bool CSoundManager::Load(HWND hWnd)
 		{enList::BGM_Bonus,		"Data\\Sound\\BGM\\BonusGameHouse.mp3",	"BGM_Bonus"},
 		{enList::SE_Clear,		"Data\\Sound\\SE\\Clear.wav",			"SE_Clear"},
 
-		//BGNを入れていく　名前つける
+		//このBGMは使えないから明日新しいBGM探す　別のサイトで
 		{enList::BGM_Title,			"Data\\Sound\\BGM\\title.mp3",			"BGM_Title"},
 		{enList::BGM_Main,			"Data\\Sound\\BGM\\main.mp3",			"BGM_Main"},
 		{enList::BGM_Kuria,			"Data\\Sound\\BGM\\kuria.mp3",			"BGM_Kuria"},
