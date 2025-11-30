@@ -16,6 +16,12 @@ public:
 		SE_Jump,		//ジャンプ
 		SE_Clear,		//クリア
 
+
+		BGM_Title,			//タイトル
+		BGM_Main,			//メイン
+		BGM_Kuria,			//クリア
+		BGM_GameOver,		//ゲームオーバー
+
 		//音が増えたら「ここ」に追加しえください
 		max,			//最大数
 	};

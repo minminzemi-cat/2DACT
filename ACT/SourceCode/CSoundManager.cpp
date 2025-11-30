@@ -60,6 +60,12 @@ bool CSoundManager::Load(HWND hWnd)
 		{enList::SE_Jump,		"Data\\Sound\\SE\\Jump.wav",			"SE_Jump"},
 		{enList::BGM_Bonus,		"Data\\Sound\\BGM\\BonusGameHouse.mp3",	"BGM_Bonus"},
 		{enList::SE_Clear,		"Data\\Sound\\SE\\Clear.wav",			"SE_Clear"},
+
+		//BGNを入れていく　名前つける
+		{enList::BGM_Title,			"Data\\Sound\\BGM\\title.mp3",			"BGM_Title"},
+		{enList::BGM_Main,			"Data\\Sound\\BGM\\main.mp3",			"BGM_Main"},
+		{enList::BGM_Kuria,			"Data\\Sound\\BGM\\kuria.mp3",			"BGM_Kuria"},
+		{enList::BGM_GameOver,		"Data\\Sound\\BGM\\gameover.mp3",		"BGM_GameOver"},
 	};
 	//配列の最大要素数を算出（配列全体のサイズ/配列一つ分のサイズ）
 	int list_max = sizeof(SList) / sizeof( SList[0] );
