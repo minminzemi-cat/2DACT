@@ -221,6 +221,7 @@ bool CGame::Create()
 	m_pCamera = new CCamera();
 	m_pCamera->SetStageWidth(m_pStage->GetWidth());
 
+
 	//サウンドデータを読み込む
 	if (CSoundManager::GetInstance()->Load(m_pGameWnd->hWnd) == false) return false;
 
