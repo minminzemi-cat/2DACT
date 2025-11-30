@@ -72,7 +72,7 @@ void CGame::InitializeGame()
 
 	m_pPlayer->m_PlayerHP = 100;
 
-	m_pBoss->InitializeGame();
+	//m_pBoss->InitializeGame();
 	
 
 	//m_pBoss2->InitializeGame();
@@ -330,7 +330,7 @@ void CGame::Update()
 					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE,
 						m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE))
 					{
-						m_pBoss->BossHP = m_pBoss->BossHP - 100;
+						m_pBoss->BossHP = m_pBoss->BossHP - 10;
 					}
 
 
@@ -345,7 +345,7 @@ void CGame::Update()
 					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE,
 						m_pBoss2->m_Boss2.x, m_pBoss2->m_Boss2.y, C_SIZE))
 					{
-						m_pBoss2->Boss2HP = m_pBoss2->Boss2HP - 100;
+						m_pBoss2->Boss2HP = m_pBoss2->Boss2HP - 10;
 
 						if (m_pBoss2->Boss2HP == 0)
 						{
@@ -420,6 +420,8 @@ void CGame::Update()
 				//タイトルへ
 				m_Scene = enScene::Title;
 			}
+			InitializeGame();
+			Create();
 
 			break;
 		case enScene::GameOver://ゲームオーバー
@@ -435,15 +437,21 @@ void CGame::Update()
 				m_Scene = enScene::Title;
 			}
 
+			//------------------------------------------------------------------
+			// 
 			//だいごくんから教えてもらった
 			//ここに初期化する関数と構築する関数を呼び出すことで
 			//初期化する処理を考える必要がなく、呼び出すことでまたゲームが一から始まる
+			//
+			//------------------------------------------------------------------
 			InitializeGame();
 			Create();
 			break;
 	}
 	
 }
+
+
 
 //描画関数(画像の表示処理を行う).
 void CGame::Draw()
