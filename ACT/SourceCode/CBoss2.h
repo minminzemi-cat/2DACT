@@ -60,7 +60,7 @@ public:
 
 	DWORD nowTime = 0;		//現在の時間.
 
-	int   Boss2HP = 1000;	//ボスのHP	
+	int   Boss2HP = 10000;	//ボスのHP	
 
 	bool	m_Atacking;		//攻撃中
 

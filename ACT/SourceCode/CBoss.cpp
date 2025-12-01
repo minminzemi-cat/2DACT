@@ -53,29 +53,33 @@ void CBoss::Update()
 
 	//ボスのHPが０以下になったら死んだということにする
 	if (BossHP <= 0) {
+
+		//爆発画像のためのm_FrameSplit.xを設定する
+		//今、ボス画像のm_FrameSplit.xが設定されているから爆発が表示されない
+
 		//死亡中の処理
-		m_Action = enBossAction::Explosion;
+		if (m_Action != enBossAction::dei)
+		{
+			m_Action = enBossAction::Explosion;
+		}
 
 		if (m_Action == enBossAction::Explosion)
 		{
+
 			
 				//すべてのアニメーションを描画し終えたら終わり
 				if ((m_FrameSplit.x) / m_FrameSplit.w > 11)
 				{
 					m_FrameSplit.x = 0;
 					m_FrameCounter = 0;
+					
+					m_Action = enBossAction::dei;
 				}
-			
+				
 		}
-
+		
 		if (m_Action == enBossAction::dei)
 		{
-			//すべてのアニメーションを描画し終えたら終わり
-			if ((800 - m_FrameSplit.x) / m_FrameSplit.w > 23)
-			{
-				m_FrameSplit.x = 800 - 160; //死亡アニメーション最初の位置に戻す
-				m_FrameCounter = 0;
-			}
 		}
 	}
 	
@@ -87,7 +91,7 @@ void CBoss::Update()
 		m_pImg = m_pBossImg;
 		break;
 	case enBossAction::dei:
-		m_Action = true;
+		
 		break;
 	case enBossAction::Explosion:
 		m_pImg = m_pExplosion01_Img;
@@ -171,13 +175,14 @@ void  CBoss::ExplosionAnimation()
 	m_FrameSplit.h = 192;
 	m_FrameSplit.y = 0;
 	//僕の画像はこの大きさでないとだめ
+	
+	
 
-	
-	if (m_FrameCounter >= 11) {
-		m_FrameSplit.x += m_FrameSplit.w;
-	
-		m_FrameCounter = 1;
-		
+		if (m_FrameCounter >= 11) {
+			m_FrameSplit.x += m_FrameSplit.w;
+
+			m_FrameCounter = 1;
+
 	}
 	
 }

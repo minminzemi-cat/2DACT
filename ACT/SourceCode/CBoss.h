@@ -21,6 +21,7 @@ public:
 		
 		Explosion,
 
+
 		None = -1,	//ñ¢ê›íË
 	};
 	public:

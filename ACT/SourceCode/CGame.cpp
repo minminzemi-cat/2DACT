@@ -276,12 +276,19 @@ void CGame::Destroy()
 //更新関数(キー入力や動作処理を行う).
 void CGame::Update()
 {	
-		//BGM_Bonusをループ再生
-	CSoundManager::PlayLoop(CSoundManager::BGM_Title);
-
+		
 	//シーンごとの処理
 	switch (m_Scene) {
 		case enScene::Title://タイトル
+
+			//BGM_Bonusをループ再生
+			CSoundManager::PlayLoop(CSoundManager::BGM_Title);
+
+
+			CSoundManager::Stop(CSoundManager::BGM_Kuria);
+
+			CSoundManager::Stop(CSoundManager::BGM_GameOver);
+
 			if (GetAsyncKeyState(VK_RETURN) & 0x0001)//Enterキーが押されたら
 			{
 				//F1キー.
@@ -296,7 +303,9 @@ void CGame::Update()
 			break;
 
 		case enScene::GameMain:
-			
+			CSoundManager::Stop(CSoundManager::BGM_Title);
+
+			CSoundManager::PlayLoop(CSoundManager::BGM_Main);
 				
 
 				//プレイヤー動作
@@ -328,10 +337,10 @@ void CGame::Update()
 				//プレイヤーがアタック状態のときの当たり判定
 				//-------------ボス------------
 				if (m_pPlayer->m_Atacking == true) {
-					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE,
-						m_pBoss->m_Boss.x, m_pBoss->m_Boss.y, C_SIZE))
+					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE/2,
+						m_pBoss->m_Boss.x + C_SIZE / 2, m_pBoss->m_Boss.y + C_SIZE / 2, C_SIZE))
 					{
-						m_pBoss->BossHP = m_pBoss->BossHP - 10;
+						m_pBoss->BossHP = m_pBoss->BossHP - 100;
 					}
 
 
@@ -343,8 +352,8 @@ void CGame::Update()
 
 				//---------------ボス２----------------
 				if (m_pPlayer->m_Atacking == true) {
-					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE,
-						m_pBoss2->m_Boss2.x, m_pBoss2->m_Boss2.y, C_SIZE))
+					if (CircleCollisionDetection(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE/2,
+						m_pBoss2->m_Boss2.x + C_SIZE / 2, m_pBoss2->m_Boss2.y + C_SIZE / 2, C_SIZE))
 					{
 						m_pBoss2->Boss2HP = m_pBoss2->Boss2HP - 10;
 
@@ -415,17 +424,35 @@ void CGame::Update()
 				
 		break;
 		case enScene::Kuria:
+			CSoundManager::Stop(CSoundManager::BGM_Main);
+
+			CSoundManager::PlayLoop(CSoundManager::BGM_Kuria);
+
 			if (GetAsyncKeyState(VK_RETURN) & 0x0001)
 			{
 
 				//タイトルへ
 				m_Scene = enScene::Title;
 			}
+
+			//------------------------------------------------------------------
+			// 
+			//だいごくんから教えてもらった
+			//ここに初期化する関数と構築する関数を呼び出すことで
+			//初期化する処理を考える必要がなく、呼び出すことでまたゲームが一から始まる
+			//
+			//------------------------------------------------------------------
+
 			InitializeGame();
 			Create();
 
 			break;
 		case enScene::GameOver://ゲームオーバー
+
+			CSoundManager::Stop(CSoundManager::BGM_Main);
+
+			CSoundManager::PlayLoop(CSoundManager::BGM_GameOver);
+
 			//F1キー.
 			if (GetAsyncKeyState(VK_F1) & 0x0001) {
 				//ウィンドウを閉じる通知を送る.
