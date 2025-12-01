@@ -62,10 +62,10 @@ bool CSoundManager::Load(HWND hWnd)
 		{enList::SE_Clear,		"Data\\Sound\\SE\\Clear.wav",			"SE_Clear"},
 
 		//このBGMは使えないから明日新しいBGM探す　別のサイトで
-		{enList::BGM_Title,			"Data\\Sound\\BGM\\title.mp3",			"BGM_Title"},
-		{enList::BGM_Main,			"Data\\Sound\\BGM\\main.mp3",			"BGM_Main"},
-		{enList::BGM_Kuria,			"Data\\Sound\\BGM\\kuria.mp3",			"BGM_Kuria"},
-		{enList::BGM_GameOver,		"Data\\Sound\\BGM\\gameover.mp3",		"BGM_GameOver"},
+		{enList::BGM_Title,			"Data\\Sound\\BGM\\title01.mp3",			"BGM_Title"},
+		{enList::BGM_Main,			"Data\\Sound\\BGM\\main01.mp3",			"BGM_Main"},
+		{enList::BGM_Kuria,			"Data\\Sound\\BGM\\kuria01.mp3",			"BGM_Kuria"},
+		{enList::BGM_GameOver,		"Data\\Sound\\BGM\\over01.mp3",		"BGM_GameOver"},
 	};
 	//配列の最大要素数を算出（配列全体のサイズ/配列一つ分のサイズ）
 	int list_max = sizeof(SList) / sizeof( SList[0] );

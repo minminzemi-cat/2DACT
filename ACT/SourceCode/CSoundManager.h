@@ -15,8 +15,6 @@ public:
 		BGM_Bonus,		//ボーナスステージ
 		SE_Jump,		//ジャンプ
 		SE_Clear,		//クリア
-
-
 		BGM_Title,			//タイトル
 		BGM_Main,			//メイン
 		BGM_Kuria,			//クリア
