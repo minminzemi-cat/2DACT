@@ -281,21 +281,4 @@ void CPlayer::Animation()
 	//}
 }
 
-//‰~‚Æ‰~‚Ì“–‚½‚è”»’è
-//bool CircleCollisionDetection(float Ax, float Ay, float Ar, float Bx, float By, float Br)
-//{
-//	float dx = Ax - Bx;
-//	float dy = Ay - By;
-//	//sqrft‚Í•½•ûª
-//	//#include<cmath>‚ª•K—v‚ç‚µ‚¢
-//	float distance = sqrtf(dx * dx + dy * dy);
-//
-//	//–½’†‚µ‚½‚Æ‚«
-//	if (distance < Ar + Br) {
-//		return true;
-//	}
-//	//ŠO‚ê‚½
-//	return false;
-//}
-
 

@@ -148,6 +148,7 @@ bool CGame::Create()
 	//”wŒi‚Ì“Ç‚İ‚İ.
 	if( m_pBackImg->LoadBmp("Data\\Image\\bg.bmp" )		== false ) return false;
 	//ƒLƒƒƒ‰ƒNƒ^[‚Ì“Ç‚İ‚İ.
+
 	if( m_pCharaImg->LoadBmp("Data\\BMP\\chara.bmp" )	== false ) return false;
 	//“G‚Ì“Ç‚İ‚İ.
 	if (m_pEnemyImg->LoadBmp("Data\\Image\\enemy_lite.bmp") == false) return false;
