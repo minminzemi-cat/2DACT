@@ -65,8 +65,7 @@ void CGame::InitializeGame()
 	m_pBoss2->m_Boss2.state = enCharaState::Living;	//生存中.
 	m_pBoss2->m_Boss2.state = m_pBoss2->enBoss2Action::Wait;
 
-	m_pBoss->BossHP = 100;
-	m_pBoss2->Boss2HP = 1000;
+
 
 	//爆発の初期化、HPゲージの初期化、
 

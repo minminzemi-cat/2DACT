@@ -65,19 +65,26 @@ void CBoss::Update()
 
 		if (m_Action == enBossAction::Explosion)
 		{
+			m_FrameSplit.w = 192;
 
+			m_Action = enBossAction::dei;
 			
 				//すべてのアニメーションを描画し終えたら終わり
 				if ((m_FrameSplit.x) / m_FrameSplit.w > 11)
 				{
+					
+
 					m_FrameSplit.x = 0;
 					m_FrameCounter = 0;
+
+					//m_Action = enBossAction::dei;
 					
-					m_Action = enBossAction::dei;
 				}
+
 				
 		}
 		
+
 		if (m_Action == enBossAction::dei)
 		{
 		}

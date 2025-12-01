@@ -23,7 +23,7 @@ CBoss2::~CBoss2()
 //初期化(リセット)関数.
 void InitializeGame()
 {
-	int   Boss2HP = 1000;	//ボスのHP
+	int   Boss2HP = 10;	//ボスのHP
 }
 
 
@@ -55,7 +55,7 @@ void CBoss2::Update()
 	//ボスのHPが０以下になったら死んだということにする
 	if (Boss2HP <= 0) {
 		//死亡中の処理
-		m_Action = enBoss2Action::Explosion;
+		//m_Action = enBoss2Action::Explosion;
 
 		if (m_Action == enBoss2Action::Explosion)
 		{
@@ -69,12 +69,12 @@ void CBoss2::Update()
 
 		if (m_Action == enBoss2Action::dei)
 		{
-			//すべてのアニメーションを描画し終えたら終わり
-			if ((800 - m_FrameSplit.x) / m_FrameSplit.w > 23)
-			{
-				m_FrameSplit.x = 800 - 160; //死亡アニメーション最初の位置に戻す
-				m_FrameCounter = 0;
-			}
+			////すべてのアニメーションを描画し終えたら終わり
+			//if ((800 - m_FrameSplit.x) / m_FrameSplit.w > 23)
+			//{
+			//	m_FrameSplit.x = 800 - 160; //死亡アニメーション最初の位置に戻す
+			//	m_FrameCounter = 0;
+			//}
 		}
 	}
 
