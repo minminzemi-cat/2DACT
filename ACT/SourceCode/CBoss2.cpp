@@ -52,29 +52,44 @@ void CBoss2::Update()
 		}
 	}
 
+	//前回のactionを保存
+	//これで爆発アニメーション開始時を検出できる
+	int prevAction = m_Action;
+
 	//ボスのHPが０以下になったら死んだということにする
 	if (Boss2HP <= 0) {
 		//死亡中の処理
-		//m_Action = enBoss2Action::Explosion;
+		if (m_Action != enBoss2Action::dei)
+		{
+			m_Action == enBoss2Action::Explosion;
+		}
 
 		if (m_Action == enBoss2Action::Explosion)
 		{
+			//今prevActionには爆発のアクションが入っており、それを爆発と等しくないとき、爆発を描画する
+			//ボスのHPが０なので、ずっと爆発処理をするになっていたが、これにより止まる
+			if (prevAction != enBoss2Action::Explosion)
+			{
+
+				m_FrameSplit.w = 192;
+				m_FrameSplit.h = 192;
+				m_FrameSplit.y = 0;
+				m_FrameSplit.x = 0;
+			}
+
+
 			//すべてのアニメーションを描画し終えたら終わり
 			if ((m_FrameSplit.x) / m_FrameSplit.w > 11)
 			{
 				m_FrameSplit.x = 0;
 				m_FrameCounter = 0;
+
+				m_Action = enBoss2Action::dei;
 			}
 		}
 
 		if (m_Action == enBoss2Action::dei)
 		{
-			////すべてのアニメーションを描画し終えたら終わり
-			//if ((800 - m_FrameSplit.x) / m_FrameSplit.w > 23)
-			//{
-			//	m_FrameSplit.x = 800 - 160; //死亡アニメーション最初の位置に戻す
-			//	m_FrameCounter = 0;
-			//}
 		}
 	}
 

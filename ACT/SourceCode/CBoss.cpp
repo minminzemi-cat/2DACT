@@ -53,7 +53,6 @@ void CBoss::Update()
 
 	//前回のactionを保存
 	//これで爆発アニメーション開始時を検出できる
-
 	int prevAction = m_Action;
 
 	//ボスのHPが０以下になったら死んだということにする
@@ -70,6 +69,8 @@ void CBoss::Update()
 
 		if (m_Action == enBossAction::Explosion)
 		{
+			//今prevActionには爆発のアクションが入っており、それを爆発と等しくないとき、爆発を描画する
+			//ボスのHPが０なので、ずっと爆発処理をするになっていたが、これにより止まる
 			if (prevAction != enBossAction::Explosion)
 			{
 
@@ -84,18 +85,13 @@ void CBoss::Update()
 				if ((m_FrameSplit.x) / m_FrameSplit.w > 11)
 				{
 					
-
 					m_FrameSplit.x = 0;
 					m_FrameCounter = 0;
-
-					
+	
 					m_Action = enBossAction::dei;
 					
 				}
-
-				
 		}
-		
 
 		if (m_Action == enBossAction::dei)
 		{
