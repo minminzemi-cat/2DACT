@@ -51,7 +51,7 @@ CGame::~CGame()
 void CGame::InitializeGame()
 {
 	//自機初期配置.
-	m_Player.x = ( WND_W / 2 ) - ( C_SIZE / 2 );
+	m_Player.x = ( WND_W /2 ) - ( C_SIZE /2);
 	m_Player.y = WND_H - ( C_SIZE + 16 );	//補正:画面下からキャラ1体分+16上の位置.
 	m_Player.state = enCharaState::Living;	//生存中.
 	m_Player.ExpAnimCnt = 0;

@@ -115,8 +115,10 @@ void CPlayer::Draw( CCamera* pCamera)
 	//アニメーション処理
 	Animation();
 
+	//ステージ上の座標にかえるみたいなの
 	VECTOR2 DispPos = pCamera->CalcToPositionInCamera(&m_Position, &m_FrameSplit);
 
+	//画像を描画
 	m_pImg->TransBlt(
 		DispPos.x,		//表示位置x座標
 		DispPos.y,		//表示位置y座標.
