@@ -384,6 +384,7 @@ void CGame::Update()
 						m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE /2
 						 ))
 					{
+						//–³“Gƒtƒ‰ƒO
 						m_Muteki_Flag = true;
 						if (m_TimeConter > 1500)
 						{
@@ -401,6 +402,7 @@ void CGame::Update()
 						m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y, C_SIZE / 2
 					))
 					{
+						//–³“Gƒtƒ‰ƒO
 						m_Muteki_Flag = true;
 						if (m_TimeConter > 1500)
 						{
