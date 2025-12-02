@@ -121,6 +121,7 @@ private:
 	CBoss* m_pBoss;
 	CBoss* m_BossHP;
 
+	//----É{ÉXÇQ-----
 	CBoss2* m_pBoss2;
 	CBoss2* m_Boss2HP;
 

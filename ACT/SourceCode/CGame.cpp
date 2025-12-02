@@ -57,11 +57,10 @@ void CGame::InitializeGame()
 	m_Player.ExpAnimCnt = 0;
 
 	//ボスの初期配置.
-	
 	m_pBoss->m_Boss.state = enCharaState::Living;	//生存中.
 	m_pBoss->m_Boss.state = m_pBoss->enBossAction::Wait;
 	
-
+	//ボス２の初期配置と状態
 	m_pBoss2->m_Boss2.state = enCharaState::Living;	//生存中.
 	m_pBoss2->m_Boss2.state = m_pBoss2->enBoss2Action::Wait;
 
@@ -231,6 +230,7 @@ bool CGame::Create()
 //破棄関数.
 void CGame::Destroy()
 {
+	//クラスのインスタンスを破棄する
 	SAFE_DELETE(m_pCamera);
 
 	SAFE_DELETE(m_pStage);
@@ -285,9 +285,11 @@ void CGame::Update()
 			CSoundManager::PlayLoop(CSoundManager::BGM_Title);
 
 
+			//クリアのBGMループをストップする
 			CSoundManager::Stop(CSoundManager::BGM_Kuria);
-
+			//ゲームーバーのBGMループをストップ
 			CSoundManager::Stop(CSoundManager::BGM_GameOver);
+
 
 			if (GetAsyncKeyState(VK_RETURN) & 0x0001)//Enterキーが押されたら
 			{
@@ -343,9 +345,13 @@ void CGame::Update()
 						m_pBoss->BossHP = m_pBoss->BossHP - 100;
 					}
 
-
+					//ボスのHPが０になったら
 					if (m_pBoss->BossHP == 0)
 					{
+						//爆発音を鳴らす
+						CSoundManager::PlaySE(CSoundManager::SE_Expltion);
+
+						//死んだ状態にするだけ
 						m_pBoss->m_Boss.state = CBoss::dei;
 					}
 				}
@@ -357,8 +363,13 @@ void CGame::Update()
 					{
 						m_pBoss2->Boss2HP = m_pBoss2->Boss2HP - 10;
 
+						//ボス2のHPが０になったら
 						if (m_pBoss2->Boss2HP == 0)
 						{
+							//爆発音を鳴らす
+							CSoundManager::PlaySE(CSoundManager::SE_Expltion);
+
+							//死んだ状態にしてクリアへ
 							m_pBoss2->m_Boss2.state = CBoss2::dei;
 							m_Scene = enScene::Kuria;
 						}
