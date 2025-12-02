@@ -70,10 +70,7 @@ void CGame::InitializeGame()
 
 	m_pPlayer->m_PlayerHP = 100;
 
-	//m_pBoss->InitializeGame();
 	
-
-	//m_pBoss2->InitializeGame();
 }
 
 //\’zŠÖ”.
