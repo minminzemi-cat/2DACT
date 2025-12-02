@@ -73,7 +73,7 @@ void CBoss::Update()
 			//ボスのHPが０なので、ずっと爆発処理をするになっていたが、これにより止まる
 			if (prevAction != enBossAction::Explosion)
 			{
-
+				//爆発の大きさ
 				m_FrameSplit.w = 192;
 				m_FrameSplit.h = 192;
 				m_FrameSplit.y = 0;
@@ -85,14 +85,16 @@ void CBoss::Update()
 				if ((m_FrameSplit.x) / m_FrameSplit.w > 11)
 				{
 					
+					//画像の描画を開始するｘ座標
 					m_FrameSplit.x = 0;
 					m_FrameCounter = 0;
 	
+					//描画し終わったら死んでる状態に
 					m_Action = enBossAction::dei;
 					
 				}
 		}
-
+		//死んでいる状態時は何もしない
 		if (m_Action == enBossAction::dei)
 		{
 		}
@@ -102,15 +104,19 @@ void CBoss::Update()
 	switch (m_Action) {
 	case enBossAction::Wait:
 		break;
+
+	//アタックのとき、アタックの画像を入れる
 	case enBossAction::Attack:
 		m_pImg = m_pBossImg;
 		break;
 	case enBossAction::dei:
 		
 		break;
+	//爆発のとき、爆発の画像を入れる
 	case enBossAction::Explosion:
 		m_pImg = m_pExplosion01_Img;
 		break;
+	//何も設定しない
 	case enBossAction::None:
 		break;
 	default:
@@ -164,15 +170,14 @@ void CBoss::Animation()
 			m_FrameCounter = 1;
 		}
 		break;
+
+	//爆発のとき、爆発アニメーション再生
 	case enBossAction::Explosion:
 		ExplosionAnimation();
 
 		break;
+	//死んだとき、何もしない
 	case enBossAction::dei:
-	
-		
-		
-
 		break;
 	case enBossAction::None:		//未設定
 		break;
@@ -181,6 +186,7 @@ void CBoss::Animation()
 	}
 }
 
+//爆発アニメーション関数
 void  CBoss::ExplosionAnimation()
 {
 
@@ -192,12 +198,14 @@ void  CBoss::ExplosionAnimation()
 	//僕の画像はこの大きさでないとだめ
 	
 	
-
+		//爆発の描画
 		if (m_FrameCounter >= 11) {
+
+			//　　　0       +=     192
 			m_FrameSplit.x += m_FrameSplit.w;
 
 			m_FrameCounter = 1;
 
-	}
+		}
 	
 }
