@@ -15,7 +15,7 @@ public:
 		BGM_Bonus,		//ボーナスステージ
 		SE_Jump,		//ジャンプ
 		SE_Clear,		//クリア
-		SE_Expltion,		//爆発音
+		SE_EX,		//爆発音
 
 		BGM_Title,			//タイトル
 		BGM_Main,			//メイン
