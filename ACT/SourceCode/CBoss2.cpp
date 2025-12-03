@@ -5,7 +5,7 @@
 
 
 CBoss2::CBoss2()
-	: CCharacter()
+	: CBoss()
 	, m_GroundPos()
 	, m_Boss2({ 576,320 })
 	, m_Action(enBoss2Action::Wait)
@@ -16,13 +16,17 @@ CBoss2::CBoss2()
 {
 	m_FrameSplit.w = 576;
 	m_FrameSplit.h = 320;
+
+	m_InazumaFrameSplit.x = 0;
+	m_InazumaFrameSplit.w = 320;
+	m_InazumaFrameSplit.h = 640;
 }
 
 CBoss2::~CBoss2()
 {
 }
 //初期化(リセット)関数.
-void InitializeGame()
+void CBoss2::InitializeGame()
 {
 	int   Boss2HP = 10;	//ボスのHP
 }
@@ -55,21 +59,19 @@ void CBoss2::Update()
 
 	}
 
-	if (Boss2HP  >=20)
+	if (Boss2HP  >=0)
 	{
-		m_Action = enBoss2Action::Inazuma;
 
-		//イナズマの処理
-		if (m_Action == enBoss2Action::Inazuma)
-		{
+		InazumaAnimation();
+		
 			//イナズマのアニメ画像は５個　５個描画したら終わり
-			if ((m_FrameSplit.x) / m_FrameSplit.w >= 5)
+			if ((m_InazumaFrameSplit.x) / m_InazumaFrameSplit.w >= 5)
 			{
 				//ｘ座標は０から
-				m_FrameSplit.x = 0;
-				m_FrameCounter = 0;
+				m_InazumaFrameSplit.x = 0;
+				m_InazumaFrameCounter = 0;
 			}
-		}
+		
 	}
 	//前回のactionを保存
 	//これで爆発アニメーション開始時を検出できる
@@ -122,7 +124,7 @@ void CBoss2::Update()
 		break;
 		//イナズマシーン
 	case enBoss2Action::Inazuma:
-		m_pImg = m_pInazumaImg;
+		
 		break;
 	case enBoss2Action::dei:
 		m_Action = true;
@@ -161,12 +163,24 @@ void CBoss2::Draw(CCamera* pCamera)
 		m_FrameSplit.x,		//元画像x座標.
 		m_FrameSplit.y);	//元画像y座標.
 
+
+	//雷画像を描画する
+	m_pInazumaImg->TransBlt(
+		DispPos2.x + rand() % 1+ 400,		//表示位置x座標
+		-100,								//表示位置y座標.
+		m_InazumaFrameSplit.w,				//画像幅
+		m_InazumaFrameSplit.h,				//画像高さ.
+		m_InazumaFrameSplit.x,				//元画像x座標.
+		m_InazumaFrameSplit.y);				//元画像y座標.
+
 }
 
 void CBoss2::Animation()
 {
 	//常にカウンターを動かす
 	m_FrameCounter++;
+
+	m_InazumaFrameCounter++;
 
 	//僕の画像はこの大きさでないとだめ
 	m_FrameSplit.w = 576;
@@ -214,13 +228,19 @@ void CBoss2::Animation()
 	}
 }
 
+
 void CBoss2::InazumaAnimation()
 {
 	//画像のサイズを間違えると描画されない
 	//ディエゴのおかげ
-	m_FrameSplit.w = 192;
-	m_FrameSplit.h = 192;
-	m_FrameSplit.y = 0;
+	
+	m_InazumaFrameSplit.y = 0;
+
+	if (m_InazumaFrameCounter >= 5) {
+		m_InazumaFrameSplit.x += m_InazumaFrameSplit.w;
+
+		m_InazumaFrameCounter = 1;
+	}
 
 }
 

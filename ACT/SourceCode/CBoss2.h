@@ -1,12 +1,12 @@
 #pragma once
-#include"CCharacter.h"		//キャラクタークラス
 #include <stdlib.h>			//乱数
+#include"CBoss.h"
 /**********************************
 * 		ボスクラス
 *	***/
 
 class CBoss2
-	: public CCharacter  //キャラクタークラスを継承
+	: public CBoss
 {
 public:
 	//動作処理列挙型
@@ -37,7 +37,7 @@ public:
 	};
 
 	//初期化(リセット)関数.
-	void InitializeGame();
+	void InitializeGame() override;
 	//動作関数
 	void Update() override;//override:再定義前の関数が仮想関数かチェックできる
 	//		仮想関数でない場合はエラーになる
@@ -53,13 +53,13 @@ public:
 	}
 
 	//アニメーション処理
-	void Animation();
+	void Animation() override;
 
 	//イナズマアニメーション
-	void InazumaAnimation();
+	void InazumaAnimation() ;
 
 	//爆発アニメーション
-	void ExplosionAnimation();
+	void ExplosionAnimation() override;
 
 	CHARA m_Boss2;			//キャラクター設定
 

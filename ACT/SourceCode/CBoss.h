@@ -26,7 +26,7 @@ public:
 	};
 	public:
 		CBoss();//コンストラクタ
-		~CBoss() override ;//デストラクタ
+		virtual~CBoss() override ;//デストラクタ
 
 		//キャラクター構造体
 		struct CHARA
@@ -37,14 +37,14 @@ public:
 		};
 		
 		//初期化(リセット)関数.
-		void InitializeGame();
+		virtual void InitializeGame();
 		//動作関数
-		void Update() override;//override:再定義前の関数が仮想関数かチェックできる
+		virtual void Update() override;//override:再定義前の関数が仮想関数かチェックできる
 								//		仮想関数でない場合はエラーになる
 		//描画関数
-		void Draw(CCamera* pCamera) override;
+		virtual void Draw(CCamera* pCamera) override;
 
-		void TwoSetImage(CImage* pImg, CImage* pImg2)
+		virtual void TwoSetImage(CImage* pImg, CImage* pImg2)
 		{
 			m_pImg = pImg;
 			m_pBossImg = pImg;
@@ -52,10 +52,10 @@ public:
 		}
 
 		//アニメーション処理
-		void Animation();
+		virtual void Animation();
 
 		//爆発アニメーション
-		void ExplosionAnimation();
+		virtual void ExplosionAnimation();
 		
 		CHARA m_Boss;
 

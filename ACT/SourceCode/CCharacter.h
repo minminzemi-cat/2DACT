@@ -39,7 +39,11 @@ protected:	//protected:外部からアクセス不可能。派生クラスでアクセス可能
 	int			m_MoveSpeed;//移動速度
 
 	CImage::FRAMESPLIT m_FrameSplit;	//1コマの画像情報
+	CImage::FRAMESPLIT m_InazumaFrameSplit;	//かみなりの1コマの画像情報
+
 	int				   m_FrameCounter;	//アニメーション制御用カウンタ
+	int				   m_InazumaFrameCounter;	//イナズマアニメーション制御用カウンタ
+
 	bool			   m_LookingRight;	//右向き判定
 	bool			   m_LookingLeft;	//ボス用　左向き判定
 };
