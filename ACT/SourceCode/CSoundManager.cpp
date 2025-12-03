@@ -59,11 +59,11 @@ bool CSoundManager::Load(HWND hWnd)
 	{
 		{enList::SE_Jump,		"Data\\Sound\\SE\\Jump.wav",			"SE_Jump"},
 		{enList::BGM_Bonus,		"Data\\Sound\\BGM\\BonusGameHouse.mp3",	"BGM_Bonus"},
-		{enList::SE_Clear,		"Data\\Sound\\SE\\Clear.wav",			"SE_Clear"},
-		{enList::SE_EX,			"Data\\Sound\\SE\\EX.mp3",				"SE_EX"},
+		{enList::SE_Clear,		"Data\\Sound\\SE\\valorant-jett-ace-new.mp3",	"SE_Clear"},
+		{enList::SE_EX,			"Data\\Sound\\SE\\reaverkill1.mp3",	"SE_EX"},
 
 		//このBGMは使えないから明日新しいBGM探す　別のサイトで
-		{enList::BGM_Title,			"Data\\Sound\\BGM\\title01.mp3",			"BGM_Title"},
+		{enList::BGM_Title,			"Data\\Sound\\BGM\\valorant.mp3",			"BGM_Title"},
 		{enList::BGM_Main,			"Data\\Sound\\BGM\\main01.mp3",			"BGM_Main"},
 		{enList::BGM_Kuria,			"Data\\Sound\\BGM\\kuria01.mp3",			"BGM_Kuria"},
 		{enList::BGM_GameOver,		"Data\\Sound\\BGM\\over01.mp3",		"BGM_GameOver"},

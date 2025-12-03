@@ -445,6 +445,8 @@ void CGame::Update()
 
 			CSoundManager::PlayLoop(CSoundManager::BGM_Kuria);
 
+			CSoundManager::PlaySE(CSoundManager::SE_EX);
+
 			if (GetAsyncKeyState(VK_RETURN) & 0x0001)
 			{
 
