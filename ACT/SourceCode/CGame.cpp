@@ -115,6 +115,8 @@ bool CGame::Create()
 
 	//ボス2画像のインスタンス生成
 	m_pBoss2Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
+	//イナズマのインスタンス生成
+	m_pInazumaImg = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
 
 	//爆発画像のインスタンス生成
 	m_pExplosion01_Img = new CImage(m_pGameWnd->hScreenDC, m_hMemDC, m_hWorkDC);
@@ -154,6 +156,11 @@ bool CGame::Create()
 
 	//ボス2の読み込み.
 	if (m_pBoss2Img->LoadBmp("Data\\Image\\Boss2.bmp") == false) return false;
+
+
+	//いなずまの読み込み.
+	if (m_pInazumaImg->LoadBmp("Data\\Image\\inazuma.bmp") == false) return false;
+
 
 	//爆発の読み込み
 	if (m_pExplosion01_Img->LoadBmp("Data\\Image\\Explosion.bmp") == false) return false;
@@ -200,7 +207,7 @@ bool CGame::Create()
 	//ボスのインスタンス生成
 	m_pBoss2 = new CBoss2();
 	//画像の設定
-	m_pBoss2->Two2SetImage(m_pBoss2Img, m_pExplosion01_Img);
+	m_pBoss2->Two3SetImage(m_pBoss2Img, m_pExplosion01_Img,m_pInazumaImg);
 
 	//ステージのインスタンス生成
 	m_pStage = new CStage();

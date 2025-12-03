@@ -12,6 +12,7 @@ CBoss2::CBoss2()
 	, m_Atacking(false)
 	, m_pBoss2Img(m_pImg)
 	, m_pExplosion01_Img(m_pImg2)
+	, m_pInazumaImg(m_pImg3)
 {
 	m_FrameSplit.w = 576;
 	m_FrameSplit.h = 320;
@@ -40,6 +41,7 @@ void CBoss2::Update()
 	if (Boss2HP >= 0) {
 		m_Action = enBoss2Action::Attack;
 
+
 		//アタック中の処理
 		if (m_Action == enBoss2Action::Attack)
 		{
@@ -50,8 +52,25 @@ void CBoss2::Update()
 				m_FrameCounter = 0;
 			}
 		}
+
 	}
 
+	if (m_PlayerHP >= 0)
+	{
+		m_Action = enBoss2Action::Inazuma;
+
+		//イナズマの処理
+		if (m_Action == enBoss2Action::Inazuma)
+		{
+			//イナズマのアニメ画像は５個　５個描画したら終わり
+			if ((m_FrameSplit.x) / m_FrameSplit.w >= 5)
+			{
+				//ｘ座標は０から
+				m_FrameSplit.x = 0;
+				m_FrameCounter = 0;
+			}
+		}
+	}
 	//前回のactionを保存
 	//これで爆発アニメーション開始時を検出できる
 	int prevAction = m_Action;
@@ -100,6 +119,9 @@ void CBoss2::Update()
 	case enBoss2Action::Attack:
 		m_pImg = m_pBoss2Img;
 		break;
+	case enBoss2Action::Inazuma:
+		m_pImg = m_pInazumaImg;
+		break;
 	case enBoss2Action::dei:
 		m_Action = true;
 		break;
@@ -122,9 +144,12 @@ void CBoss2::Draw(CCamera* pCamera)
 	//この本体はキャラクタークラスにある　親クラス
 	//m_pImg = m_pBossImg;
 
+	//ポジションを決めてそこに描画する
 	m_Position = { m_Boss2.x, m_Boss2.y };
+	//ステージ上の座標からカメラ上の座標にする
 	VECTOR2 DispPos2 = pCamera->CalcToPositionInCamera(&m_Position, &m_FrameSplit);
 
+	//画像を描画する
 	m_pImg->TransBlt(
 		DispPos2.x+100,		//表示位置x座標
 		150,				//表示位置y座標.

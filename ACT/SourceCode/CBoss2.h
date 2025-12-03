@@ -1,7 +1,7 @@
 #pragma once
 #include"CCharacter.h"		//キャラクタークラス
-
-
+#include"CPlayer.h"			//プレイヤーの情報が欲しいから読み込んだ
+#include <stdlib.h>			//乱数
 /**********************************
 * 		ボスクラス
 *	***/
@@ -16,6 +16,8 @@ public:
 		Wait = 0,	//待機
 
 		Attack,     //攻撃
+
+		Inazuma,  //いなずま
 
 		dei,		//死亡
 
@@ -43,11 +45,12 @@ public:
 //描画関数
 	void Draw(CCamera* pCamera) override;
 
-	void Two2SetImage(CImage* pImg, CImage* pImg2)
+	void Two3SetImage(CImage* pImg, CImage* pImg2,CImage* pImg3)
 	{
 		m_pImg = pImg;
 		m_pBoss2Img = pImg;
 		m_pExplosion01_Img = pImg2;
+		m_pInazumaImg = pImg3;
 	}
 
 	//アニメーション処理
@@ -69,8 +72,9 @@ private:
 
 	CImage* m_pBoss2Img;
 	CImage* m_pExplosion01_Img;
+	CImage* m_pInazumaImg;
 
-
+	CPlayer* m_PlayerHP;
 
 	int  	m_Action;
 

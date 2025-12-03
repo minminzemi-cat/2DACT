@@ -91,7 +91,10 @@ private:
 	CImage*		m_pEnemyImg;		//敵画像.
 	CImage*     m_pBossImg;     //ボス画像.
 
+
 	CImage*		m_pBoss2Img;		//ボス２画像
+	CImage*		m_pInazumaImg;			//稲妻
+
 	
 	CImage*		m_pExplosion01_Img;  //爆発アニメーション画像01
 
