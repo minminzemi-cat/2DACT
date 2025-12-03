@@ -59,7 +59,8 @@ void CBoss2::Update()
 
 	}
 
-	if (Boss2HP  >=0)
+	//ƒ{ƒX‚ÌHP‚ª‚OˆÈã‚Ì‚Æ‚«
+	if (Boss2HP >= 0)
 	{
 
 		InazumaAnimation();

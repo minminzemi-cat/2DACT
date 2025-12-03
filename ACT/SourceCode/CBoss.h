@@ -57,24 +57,25 @@ public:
 		//爆発アニメーション
 		virtual void ExplosionAnimation();
 		
+		//キャラクター
 		CHARA m_Boss;
 
 		DWORD nowTime = 0;		//現在の時間.
 
 		int   BossHP = 1000;	//ボスのHP	
 
+		
 		bool	m_Atacking;		//攻撃中
 
 private:
 	int			m_GroundPos;	//地面の位置（定数でも可）
 
+	//画像を読み込む
 	CImage* m_pBossImg;
 	CImage* m_pExplosion01_Img;
 
-
+	//アクション中
 	int  	m_Action;
-
-	bool   m_Explosion_Flag;
 
 
 };

@@ -11,7 +11,6 @@ CBoss::CBoss()
 	,m_Atacking(false)
 	,m_pBossImg(m_pImg)
 	,m_pExplosion01_Img(m_pImg2)
-	,m_Explosion_Flag(false)
 {
 }
 

@@ -41,9 +41,10 @@ public:
 	//動作関数
 	void Update() override;//override:再定義前の関数が仮想関数かチェックできる
 	//		仮想関数でない場合はエラーになる
-//描画関数
+	//描画関数
 	void Draw(CCamera* pCamera) override;
 
+	//画像を読み込む
 	void Two3SetImage(CImage* pImg, CImage* pImg2,CImage* pImg3)
 	{
 		m_pImg = pImg;
@@ -78,6 +79,7 @@ private:
 	CImage* m_pInazumaImg;
 
 
+	//アクション
 	int  	m_Action;
 
 
