@@ -346,7 +346,7 @@ void CGame::Update()
 					if (m_pBoss->BossHP == 0)
 					{
 						//”š”­‰¹‚ð–Â‚ç‚·
-						//CSoundManager::PlaySE(CSoundManager::SE_EX);
+						CSoundManager::PlaySE(CSoundManager::SE_EX);
 
 						//Ž€‚ñ‚¾ó‘Ô‚É‚·‚é‚¾‚¯
 						m_pBoss->m_Boss.state = CBoss::dei;
@@ -364,7 +364,7 @@ void CGame::Update()
 						if (m_pBoss2->Boss2HP == 0)
 						{
 							//”š”­‰¹‚ð–Â‚ç‚·
-							//CSoundManager::PlaySE(CSoundManager::SE_EX);
+							CSoundManager::PlaySE(CSoundManager::SE_EX);
 
 							//Ž€‚ñ‚¾ó‘Ô‚É‚µ‚ÄƒNƒŠƒA‚Ö
 							m_pBoss2->m_Boss2.state = CBoss2::dei;

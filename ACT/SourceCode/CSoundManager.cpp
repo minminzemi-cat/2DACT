@@ -60,7 +60,7 @@ bool CSoundManager::Load(HWND hWnd)
 		{enList::SE_Jump,		"Data\\Sound\\SE\\Jump.wav",			"SE_Jump"},
 		{enList::BGM_Bonus,		"Data\\Sound\\BGM\\BonusGameHouse.mp3",	"BGM_Bonus"},
 		{enList::SE_Clear,		"Data\\Sound\\SE\\Clear.wav",			"SE_Clear"},
-		//{enList::SE_EX,		"Data\\Sound\\SE\\ex3.wav",			"SE_EX"},
+		{enList::SE_EX,			"Data\\Sound\\SE\\EX.mp3",				"SE_EX"},
 
 		//このBGMは使えないから明日新しいBGM探す　別のサイトで
 		{enList::BGM_Title,			"Data\\Sound\\BGM\\title01.mp3",			"BGM_Title"},
