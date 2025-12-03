@@ -1,6 +1,5 @@
 #pragma once
 #include"CCharacter.h"		//キャラクタークラス
-#include"CPlayer.h"			//プレイヤーの情報が欲しいから読み込んだ
 #include <stdlib.h>			//乱数
 /**********************************
 * 		ボスクラス
@@ -56,10 +55,13 @@ public:
 	//アニメーション処理
 	void Animation();
 
+	//イナズマアニメーション
+	void InazumaAnimation();
+
 	//爆発アニメーション
 	void ExplosionAnimation();
 
-	CHARA m_Boss2;
+	CHARA m_Boss2;			//キャラクター設定
 
 	DWORD nowTime = 0;		//現在の時間.
 
@@ -70,11 +72,11 @@ public:
 private:
 	int			m_GroundPos;	//地面の位置（定数でも可）
 
+	//この画像を使うという宣言
 	CImage* m_pBoss2Img;
 	CImage* m_pExplosion01_Img;
 	CImage* m_pInazumaImg;
 
-	CPlayer* m_PlayerHP;
 
 	int  	m_Action;
 

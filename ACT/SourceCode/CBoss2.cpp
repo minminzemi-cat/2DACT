@@ -55,7 +55,7 @@ void CBoss2::Update()
 
 	}
 
-	if (m_PlayerHP >= 0)
+	if (Boss2HP  >=20)
 	{
 		m_Action = enBoss2Action::Inazuma;
 
@@ -116,15 +116,18 @@ void CBoss2::Update()
 	switch (m_Action) {
 	case enBoss2Action::Wait:
 		break;
+		//アタックシーン
 	case enBoss2Action::Attack:
 		m_pImg = m_pBoss2Img;
 		break;
+		//イナズマシーン
 	case enBoss2Action::Inazuma:
 		m_pImg = m_pInazumaImg;
 		break;
 	case enBoss2Action::dei:
 		m_Action = true;
 		break;
+		//爆発シーン
 	case enBoss2Action::Explosion:
 		m_pImg = m_pExplosion01_Img;
 		break;
@@ -184,6 +187,9 @@ void CBoss2::Animation()
 			m_FrameCounter = 1;
 		}
 		break;
+	case enBoss2Action::Inazuma:
+		InazumaAnimation();
+		break;
 	case enBoss2Action::Explosion:
 		ExplosionAnimation();
 
@@ -207,6 +213,17 @@ void CBoss2::Animation()
 		break;
 	}
 }
+
+void CBoss2::InazumaAnimation()
+{
+	//画像のサイズを間違えると描画されない
+	//ディエゴのおかげ
+	m_FrameSplit.w = 192;
+	m_FrameSplit.h = 192;
+	m_FrameSplit.y = 0;
+
+}
+
 
 void  CBoss2::ExplosionAnimation()
 {
